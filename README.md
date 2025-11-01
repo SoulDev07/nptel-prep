@@ -1,4 +1,4 @@
-# NPTEL Prep — Practice App
+# NPTEL Prep App
 
 Purpose
 - A lightweight, client-side web app to practice multiple-choice questions (MCQs) in NPTEL-style.

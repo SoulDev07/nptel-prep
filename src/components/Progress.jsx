@@ -8,9 +8,9 @@ export default function Progress({ total, answers = {}, order = null, index = 0 
 
   return (
     <div className="progress-wrap" aria-hidden>
-      <div style={{ minWidth: 110, textAlign: "right" }}>
-        <div style={{ fontSize: 13, color: "var(--muted)", fontWeight: 600 }}>Progress</div>
-        <div style={{ color: "var(--muted)", fontSize: 12 }}>
+      <div className="progress-info">
+        <div className="progress-label">Progress</div>
+        <div className="progress-count">
           {done} / {total}
         </div>
       </div>
@@ -19,7 +19,7 @@ export default function Progress({ total, answers = {}, order = null, index = 0 
         <i style={{ width: `${pct}%` }} />
       </div>
 
-      <div style={{ minWidth: 56, textAlign: "right", color: "var(--muted)", fontSize: 13, fontWeight: 700 }}>{pct}%</div>
+      <div className="progress-pct">{pct}%</div>
     </div>
   );
 }
