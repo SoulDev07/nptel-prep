@@ -3,6 +3,7 @@ import data from "./assets/data.json";
 import QuestionCard from "./components/QuestionCard";
 import Header from "./components/Header";
 import useKeyboard from "./hooks/useKeyboard";
+import StatsCard from "./components/StatsCard";
 
 import { shuffleIndices, loadState, saveState } from "./utils";
 
@@ -12,6 +13,8 @@ export default function App() {
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [reveal, setReveal] = useState(false);
+  const [finished, setFinished] = useState(false); // new state
+  const [hydrated, setHydrated] = useState(false); // <- new: prevent initial overwrite of stored state
 
   useEffect(() => {
     const s = loadState();
@@ -24,12 +27,26 @@ export default function App() {
       setOrder(o);
       saveState({ order: o, index: 0, answers: {} });
     }
+    // mark hydration requested; setHydrated(true) ensures subsequent saves persist current app state
+    setHydrated(true);
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
+    // don't persist until we've performed initial load (avoid overwriting saved state on mount)
+    if (!hydrated) return;
     saveState({ order, index, answers });
-  }, [order, index, answers]);
+  }, [order, index, answers, hydrated]);
+
+  // keep 'reveal' in sync with the currently selected question:
+  // reveal should be true when that question has a recorded chosen value (non-null),
+  // otherwise false (this allows reattempts when chosen === null).
+  useEffect(() => {
+    const qIndexForReveal = order[index];
+    if (qIndexForReveal == null) return;
+    const a = answers[qIndexForReveal];
+    setReveal(Boolean(a && a.chosen != null));
+  }, [index, order, answers]);
 
   const qIndex = order[index];
   const current = data[qIndex];
@@ -44,14 +61,17 @@ export default function App() {
   }
 
   function next() {
-    setReveal(false);
-    if (index < total - 1) setIndex((i) => i + 1);
+    if (index < total - 1) {
+      setIndex((i) => i + 1);
+    } else {
+      setFinished(true); // reached end -> show final stats
+    }
   }
 
   function prev() {
     if (index > 0) {
       setIndex((i) => i - 1);
-      setReveal(false);
+      setFinished(false); // leaving final screen if navigating back
     }
   }
 
@@ -61,11 +81,20 @@ export default function App() {
     setIndex(0);
     setAnswers({});
     setReveal(false);
+    setFinished(false); // ensure finished cleared
     saveState({ order: o, index: 0, answers: {} });
   }
 
   function answerByIndex(optIdx) {
-    if (current && Array.isArray(current.options) && current.options[optIdx] != null && !reveal) {
+    // allow numeric answer only when question is not already answered (chosen != null)
+    const alreadyAnswered = answers[qIndex] && answers[qIndex].chosen != null;
+    if (
+      current &&
+      Array.isArray(current.options) &&
+      current.options[optIdx] != null &&
+      !reveal &&
+      !alreadyAnswered
+    ) {
       handleAnswer(current.options[optIdx]);
     }
   }
@@ -117,6 +146,9 @@ export default function App() {
 
   const doneCount = Object.keys(answers).length;
   const correctCount = Object.values(answers).filter((a) => a.correct).length;
+  // separate progress % (how many answered) and accuracy % (correct of answered)
+  const progressPct = total === 0 ? 0 : Math.round((doneCount / total) * 100);
+  const accuracyPct = doneCount === 0 ? 0 : Math.round((correctCount / doneCount) * 100);
 
   return (
     <div className="app">
@@ -131,7 +163,20 @@ export default function App() {
       />
 
       <div style={{ marginTop: 8 }}>
-        {current ? (
+        {finished ? (
+          <StatsCard
+            total={total}
+            done={doneCount}
+            correct={correctCount}
+            progressPct={progressPct}
+            accuracyPct={accuracyPct}
+            onRestart={restart}
+            onReview={() => {
+              setFinished(false);
+              setIndex(0);
+            }}
+          />
+        ) : current ? (
           <>
             <QuestionCard qitem={current} onAnswer={handleAnswer} answered={answers[qIndex]} reveal={reveal} />
 

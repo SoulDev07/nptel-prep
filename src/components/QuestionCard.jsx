@@ -5,6 +5,9 @@ export default function QuestionCard({
   reveal,
 }) {
   // qitem: { question, options:[], correctAnswer: "..." }
+  // only consider "answered" when a non-null choice was stored.
+  // this lets chosen === null represent a "skipped" state that can be reattempted.
+  const isAnswered = Boolean(answered && answered.chosen != null);
   return (
     <div className="card" aria-live="polite">
       <div className="q-top">
@@ -22,6 +25,10 @@ export default function QuestionCard({
             if (isCorrect) cls += " correct";
             else if (isChosen && !isCorrect) cls += " wrong";
             else cls += " disabled";
+          } else if (isAnswered) {
+            // when revisiting an answered question, highlight chosen and make others non-interactive
+            if (isChosen) cls += " chosen";
+            else cls += " disabled";
           }
 
           return (
@@ -31,16 +38,17 @@ export default function QuestionCard({
               role="button"
               tabIndex={0}
               onClick={() => {
-                if (!reveal) onAnswer(opt);
+                // only accept answers when not revealed and not already answered
+                if (!reveal && !isAnswered) onAnswer(opt);
               }}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
-                  if (!reveal) onAnswer(opt);
+                  if (!reveal && !isAnswered) onAnswer(opt);
                 }
               }}
               aria-pressed={isChosen ? "true" : "false"}
-              aria-disabled={reveal ? "true" : "false"}
+              aria-disabled={isAnswered || reveal ? "true" : "false"}
             >
               <div className="dot">{String.fromCharCode(65 + i)}</div>
               <div className="text" dangerouslySetInnerHTML={{ __html: opt }} />

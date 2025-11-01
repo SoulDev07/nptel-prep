@@ -22,23 +22,23 @@ Keyboard & accessibility
 - Options are focusable and selectable via keyboard; progress bar has ARIA attributes.
 
 Project structure
-- index.html — app entry, SEO and OG metadata, preconnect for fonts.
+- index.html - app entry, SEO and OG metadata, preconnect for fonts.
 - public/
-  - logo.svg — site logo (used in header & favicon).
-  - og-card.svg, og-card-dark.svg — Open Graph social cards.
+  - logo.svg - site logo (used in header & favicon).
+  - og-card.svg, og-card-dark.svg - Open Graph social cards.
 - src/
-  - main.jsx — mount React app, import CSS.
-  - App.jsx — main app state, question flow and wiring.
-  - index.css — global styles and responsive rules.
-  - assets/data.json — questions array.
+  - main.jsx - mount React app, import CSS.
+  - App.jsx - main app state, question flow and wiring.
+  - index.css - global styles and responsive rules.
+  - assets/data.json - questions array.
   - components/
-    - Header.jsx — header (logo, score, progress, restart).
-    - Progress.jsx — progress bar component.
-    - QuestionCard.jsx — question + options rendering.
+    - Header.jsx - header (logo, score, progress, restart).
+    - Progress.jsx - progress bar component.
+    - QuestionCard.jsx - question + options rendering.
   - hooks/
-    - useKeyboard.js — centralized keyboard handling.
+    - useKeyboard.js - centralized keyboard handling.
   - utils/
-    - index.js — shared helpers (shuffleIndices, loadState, saveState).
+    - index.js - shared helpers (shuffleIndices, loadState, saveState).
 
 Data format (src/assets/data.json)
 - Expect an array of objects:
