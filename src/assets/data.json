@@ -1,0 +1,1204 @@
+[
+  {
+    "question": "In which year was the Earth Summit held?",
+    "options": [
+      "1982",
+      "1992",
+      "2002",
+      "2012"
+    ],
+    "correctAnswer": "1992"
+  },
+  {
+    "question": "Which of the following does not qualify for abiotic substances?",
+    "options": [
+      "Oxygen",
+      "Nitrogen",
+      "Plant",
+      "Water"
+    ],
+    "correctAnswer": "Plant"
+  },
+  {
+    "question": "Development is concerned with the ‘perception’, ‘representation’ and ‘connection’ between _______________ in stages of human & societal development.",
+    "options": [
+      "Environment",
+      "Human society",
+      "Living organism",
+      "Human society and environment"
+    ],
+    "correctAnswer": "Human society and environment"
+  },
+  {
+    "question": "_________ refers to the surroundings, or the context within which humans, animals, plants and other exist.",
+    "options": [
+      "Culture",
+      "Environment",
+      "Society",
+      "Tradition"
+    ],
+    "correctAnswer": "Environment"
+  },
+  {
+    "question": "Economic and Human Development Index (HDI) are not merely about reducing poverty i.e. increasing GDP but includes other indicators such as:",
+    "options": [
+      "Literacy and education",
+      "Life-expectancy, health, and social welfare, human rights",
+      "State of the environment, and the development of human capacities",
+      "All of these"
+    ],
+    "correctAnswer": "All of these"
+  },
+  {
+    "question": "Which of the following statement is true about ecology?",
+    "options": [
+      "It understand the relationship between living organisms",
+      "It understand the relationship between living organisms and machines",
+      "It understand the relationship of living organisms to one another and to their physical environment",
+      "None of these"
+    ],
+    "correctAnswer": "It understand the relationship of living organisms to one another and to their physical environment"
+  },
+  {
+    "question": "_________ are organisms that utilize organic materials manufactured by producers.",
+    "options": [
+      "Autotrophics",
+      "Abiotics",
+      "Saprophytic",
+      "Heterotrophics"
+    ],
+    "correctAnswer": "Heterotrophics"
+  },
+  {
+    "question": "_____________ provide both a theoretical and practical basis for studying ecosystem function: hydrologic, carbon, nitrogen, phosphorus and Sulphur.",
+    "options": [
+      "Geochemical cycles",
+      "Biochemical cycles",
+      "Biogeochemical cycles",
+      "None of these"
+    ],
+    "correctAnswer": "Biogeochemical cycles"
+  },
+  {
+    "question": "Which of the followings are levels of organization?",
+    "options": [
+      "Individual, population, community, ecosystem, biome, and biosphere",
+      "Individual, population, community, ecosystem",
+      "Ecosystem, biome, and biosphere",
+      "Biome and biosphere"
+    ],
+    "correctAnswer": "Individual, population, community, ecosystem, biome, and biosphere"
+  },
+  {
+    "question": "What does ‘sustainable well-being’ involves?",
+    "options": [
+      "Pursuing sustainable development to increase income",
+      "Pursuing sustainable development to decrease income inequality",
+      "Pursuing sustainable development to achieve well-being where it is absent",
+      "None of these"
+    ],
+    "correctAnswer": "Pursuing sustainable development to achieve well-being where it is absent"
+  },
+  {
+    "question": "Who author the Silent Spring?",
+    "options": [
+      "Bruce A. Wilcox",
+      "Michael E. Soulé",
+      "Rachel Carson",
+      "Vandana Shiva"
+    ],
+    "correctAnswer": "Rachel Carson"
+  },
+  {
+    "question": "The ‘Montreal Protocol’ was adopted in _____.",
+    "options": [
+      "1987",
+      "1999",
+      "2004",
+      "2009"
+    ],
+    "correctAnswer": "1987"
+  },
+  {
+    "question": "The term ‘ecological refugees’ refers to:",
+    "options": [
+      "Unemployed people who eke out a living in the cities on the leavings of omnivores prosperity",
+      "Peasants-turned-slum dwellers who eke out a living in the cities on the leavings of omnivores prosperity",
+      "Displaced people who eke out a living in the cities on the leavings of omnivores prosperity",
+      "None of these"
+    ],
+    "correctAnswer": "Peasants-turned-slum dwellers who eke out a living in the cities on the leavings of omnivores prosperity"
+  },
+  {
+    "question": "Which of the following individuals is referred to as the “godmother of modern environmentalism”?",
+    "options": [
+      "Judith Butler",
+      "Mary Wollstonecraft",
+      "Rachel Carson",
+      "Susan Walby"
+    ],
+    "correctAnswer": "Rachel Carson"
+  },
+  {
+    "question": "In the 1940s, which of the following was created as the modern synthetic insecticide?",
+    "options": [
+      "Organophosphates",
+      "Carbamates",
+      "Dichloro-diphenyl-trichloroethane",
+      "Pyrethroids"
+    ],
+    "correctAnswer": "Dichloro-diphenyl-trichloroethane"
+  },
+  {
+    "question": "Which of the following significant laws was/were passed to establish how the Mississippi River should be administered?",
+    "options": [
+      "The National Environmental Policy Act (NEPA)",
+      "The Federal Water Pollution Control Act (FWPCA), 1972",
+      "Upper Mississippi River Management Act (UMRMA), 1986",
+      "All of these"
+    ],
+    "correctAnswer": "All of these"
+  },
+  {
+    "question": "Who among the following argued that science and technology had been effectively removed from any larger policy framework and insulated from public input and opinion?",
+    "options": [
+      "Rachel Carson",
+      "Arundhati Roy",
+      "Arun Agrawal",
+      "Ramachandra Guha"
+    ],
+    "correctAnswer": "Rachel Carson"
+  },
+  {
+    "question": "Preservation is based on American frontier ideology and notions of the environment as defined in terms of _________.",
+    "options": [
+      "Climate change",
+      "Environmental justice",
+      "Pollution",
+      "Wilderness"
+    ],
+    "correctAnswer": "Wilderness"
+  },
+  {
+    "question": "‘Earth Day’ was first observed on April 22, _______.",
+    "options": [
+      "1940",
+      "1950",
+      "1960",
+      "1970"
+    ],
+    "correctAnswer": "1970"
+  },
+  {
+    "question": "Which of the following books contains the phrase: “A thing is right when it tends to preserve the integrity, stability, and beauty of the biotic community”?",
+    "options": [
+      "A Sand County Almanac",
+      "Population Bomb",
+      "Spaceship Earth",
+      "Silent Spring"
+    ],
+    "correctAnswer": "A Sand County Almanac"
+  },
+  {
+    "question": "According to Marx, capitalist production disturbs the metabolic interaction between ___________",
+    "options": [
+      "Man and woman",
+      "Women and the Earth",
+      "Man and the Earth",
+      "Man and the Environment"
+    ],
+    "correctAnswer": "Man and the Earth"
+  },
+  {
+    "question": "What does the term ‘Eco-Marxism’ mean?",
+    "options": [
+      "Ecological research with feminist perspective",
+      "Ecological research with antifeminist perspective",
+      "Ecological perspective with gender development",
+      "Ecological research with Marxist thought and action"
+    ],
+    "correctAnswer": "Ecological research with Marxist thought and action"
+  },
+  {
+    "question": "Who among the following sees nature as God Shiva’s feminine principle?",
+    "options": [
+      "Ariel Salleh",
+      "Karen J. Warren",
+      "Val Plumwood",
+      "Vandana Shiva"
+    ],
+    "correctAnswer": "Vandana Shiva"
+  },
+  {
+    "question": "Who looked into the origins of the relationship between women and nature?",
+    "options": [
+      "Carol J. Adams",
+      "Carolyn Merchant",
+      "Maria Mies",
+      "Val Plumwood"
+    ],
+    "correctAnswer": "Carolyn Merchant"
+  },
+  {
+    "question": "When did ecofeminism emerged?",
+    "options": [
+      "1970",
+      "1990",
+      "2000",
+      "2010"
+    ],
+    "correctAnswer": "1970"
+  },
+  {
+    "question": "Which study looks at the interactions between gender, society, and environment?",
+    "options": [
+      "Eco gender",
+      "Eco feminism",
+      "Development",
+      "Gender and Environment"
+    ],
+    "correctAnswer": "Eco gender"
+  },
+  {
+    "question": "What movement in India could be said to have laid the groundwork for feminist political ecology?",
+    "options": [
+      "Chipko Movement",
+      "Independence Movement",
+      "Swadeshi Movement",
+      "Satyagraha Movement"
+    ],
+    "correctAnswer": "Chipko Movement"
+  },
+  {
+    "question": "The Ecological Rift was written by which of the following?",
+    "options": [
+      "Alfred Russel Wallace and Charles Darwin",
+      "Brett Clark, Richard York, and John Bellamy Foster",
+      "Karl Marx and Friedrich Engels",
+      "Karl Mannheim and David Kettler"
+    ],
+    "correctAnswer": "Brett Clark, Richard York, and John Bellamy Foster"
+  },
+  {
+    "question": "Cultural ecofeminists promote a connection between women and the _________",
+    "options": [
+      "Culture",
+      "Environment",
+      "God",
+      "Men"
+    ],
+    "correctAnswer": "Environment"
+  },
+  {
+    "question": "What, in Eco-Marxism, is the cause of the ongoing environmental degradation?",
+    "options": [
+      "Climate change",
+      "Destructive economic and political system",
+      "Air pollution",
+      "Soil erosion"
+    ],
+    "correctAnswer": "Destructive economic and political system"
+  },
+  {
+    "question": "Which of the following statement is true about environmental ethics?",
+    "options": [
+      "A part of philosophy which considers the ethical relationship between human beings and God",
+      "A part of philosophy which considers the ethical relationship between human beings and machine",
+      "A part of philosophy which considers the ethical relationship between human beings and natural environment",
+      "A part of philosophy which considers the ethical relationship between human beings and their culture"
+    ],
+    "correctAnswer": "A part of philosophy which considers the ethical relationship between human beings and natural environment"
+  },
+  {
+    "question": "Who authored the book Small is Beautiful?",
+    "options": [
+      "M.K. Gandhi",
+      "Arundhati Roy",
+      "E.F. Schumacher",
+      "Vandana Shiva"
+    ],
+    "correctAnswer": "E.F. Schumacher"
+  },
+  {
+    "question": "What are environmental philosophies primarily concerned with?",
+    "options": [
+      "Human-machine relationship",
+      "Human-god relationship",
+      "Human-cosmos relationship",
+      "Human-nature relationship"
+    ],
+    "correctAnswer": "Human-nature relationship"
+  },
+  {
+    "question": "The statement “what we need today is a tremendous expansion of ecological thinking” was made by whom among the following?",
+    "options": [
+      "Arne Naess",
+      "Roderick Nash",
+      "Lynn White",
+      "Murray Bookchin"
+    ],
+    "correctAnswer": "Arne Naess"
+  },
+  {
+    "question": "What is “social ecology”?",
+    "options": [
+      "The study of the one-way relationship between the human society and the ecological infrastructure",
+      "The study of the one-way relationship between the human society and the ecological disaster",
+      "The study of the reciprocal relationship between the human society and the ecological infrastructure",
+      "The study of the reciprocal relationship between the human society and the ecological disaster"
+    ],
+    "correctAnswer": "The study of the reciprocal relationship between the human society and the ecological infrastructure"
+  },
+  {
+    "question": "Gandhi asserts that industrialization and mechanization produce __________________.",
+    "options": [
+      "Decentralization of political power",
+      "Decentralization of economic power",
+      "Centralization of political power",
+      "Centralization of economic power"
+    ],
+    "correctAnswer": "Centralization of economic power"
+  },
+  {
+    "question": "The term ‘deep ecology’ was coined by ____________.",
+    "options": [
+      "Arne Naess",
+      "Murray Bookchin",
+      "Lynn White",
+      "Roderick Nash"
+    ],
+    "correctAnswer": "Arne Naess"
+  },
+  {
+    "question": "What message did Gandhi convey through Swadeshi?",
+    "options": [
+      "A non-violent upliftment of urban economy by the utilisation of capital-intensive techniques of production",
+      "A non-violent upliftment of village economy by the utilisation of capital-intensive techniques of production",
+      "A non-violent upliftment of village economy by the utilisation of labour intensive techniques of production",
+      "A non-violent upliftment of urban economy by the utilisation of labour intensive techniques of production"
+    ],
+    "correctAnswer": "A non-violent upliftment of village economy by the utilisation of labour intensive techniques of production"
+  },
+  {
+    "question": "As an understanding of environmental ethics, which of the following statements most accurately describes “Hind Swaraj” (1909)?",
+    "options": [
+      "It has given us an alternative perspective on development while explaining how the current mode of development is friendly of man by man and of nature by man",
+      "It has given us an alternative perspective on development while explaining how the past mode of development was exploitative of man by man and of nature by man",
+      "It has given us an alternative perspective on development while explaining how the current mode of development is exploitative of man by man and of nature by man",
+      "It has given us an alternative perspective on development while explaining how the past mode of development was friendly of man by man and of nature by man"
+    ],
+    "correctAnswer": "It has given us an alternative perspective on development while explaining how the current mode of development is exploitative of man by man and of nature by man"
+  },
+  {
+    "question": "What, in Arne Naess’s opinion, is the core of deep ecology?",
+    "options": [
+      "Questioning the norms of our society, and to the development of a total view",
+      "Questioning the values of our society, and to the development of a total view",
+      "Questioning the beliefs of our society, and to the development of a total view",
+      "None of these"
+    ],
+    "correctAnswer": "Questioning the values of our society, and to the development of a total view"
+  },
+  {
+    "question": "What does the doctrine of ‘ahimsa’ entails?",
+    "options": [
+      "Non-violence against human beings",
+      "Non-violence against animals",
+      "Both ‘non-violence against animals’ and ‘non-violence against human beings’",
+      "None of these"
+    ],
+    "correctAnswer": "Both ‘non-violence against animals’ and ‘non-violence against human beings’"
+  },
+  {
+    "question": "According to Lynn White, the development of science was clearly related to ____________ traditions in the mediaeval times.",
+    "options": [
+      "Judeo-Christian",
+      "Christian",
+      "Judaism",
+      "None of these"
+    ],
+    "correctAnswer": "Judeo-Christian"
+  },
+  {
+    "question": "Which of the following is believed to be the primary cause for the havoc wreaked by Western societies on the earth?",
+    "options": [
+      "Biblical writings about “man’s dominance on animals”",
+      "Biblical writings about “man’s right to master the women”",
+      "Biblical writings about “man’s right to master the cosmos”",
+      "Biblical writings about “man’s right to master the earth”"
+    ],
+    "correctAnswer": "Biblical writings about “man’s right to master the earth”"
+  },
+  {
+    "question": "Our ecologic crisis is the product of an emerging, entirely novel, ________________.",
+    "options": [
+      "Democratic culture",
+      "Bureaucracy culture",
+      "Aristocratic culture",
+      "Plutocracy culture"
+    ],
+    "correctAnswer": "Democratic culture"
+  },
+  {
+    "question": "Which of the following victory is considered as the greatest psychic revolution in the history of our culture?",
+    "options": [
+      "The victory of Christianity over Paganism",
+      "The victory of Islam over Paganism",
+      "The victory of Islam over Confucianism",
+      "The victory of Christianity over Confucianism"
+    ],
+    "correctAnswer": "The victory of Christianity over Paganism"
+  },
+  {
+    "question": "What was the fear of bringing religion into the domain of environmentalism?",
+    "options": [
+      "It will threaten subjectivity, empirical investigation, professionalism, or family values",
+      "It will threaten subjectivity, scientific investigation, professionalism, or democratic values",
+      "It will threaten objectivity, empirical investigation, professionalism, or family values",
+      "It will threaten objectivity, scientific investigation, professionalism, or democratic values"
+    ],
+    "correctAnswer": "It will threaten objectivity, scientific investigation, professionalism, or democratic values"
+  },
+  {
+    "question": "What guidelines does the Buddhist tradition provide?",
+    "options": [
+      "To treasure and conserve nature, of which animals are an active part",
+      "To treasure and conserve nature, of which human beings are a dormant part",
+      "To treasure and conserve nature, of which human beings are an active part",
+      "To treasure and conserve nature, of which animals are a dormant part"
+    ],
+    "correctAnswer": "To treasure and conserve nature, of which human beings are an active part"
+  },
+  {
+    "question": "The Earth, according to the________________, is not just for humans but also for other creatures as well.",
+    "options": [
+      "Atharvaveda",
+      "Samaveda",
+      "Rigveda",
+      "Yajurveda"
+    ],
+    "correctAnswer": "Atharvaveda"
+  },
+  {
+    "question": "The essay ‘The Historical Roots of our Ecological Crisis’ was written by ___________.",
+    "options": [
+      "None of these",
+      "Christophe Munier",
+      "Lynn White",
+      "Rachel Carson"
+    ],
+    "correctAnswer": "Lynn White"
+  },
+  {
+    "question": "Our science and technology have grown out of ______________ toward man’s relation to nature.",
+    "options": [
+      "Islamic attitude",
+      "Christian attitude",
+      "Jewish attitude",
+      "Buddhist attitude"
+    ],
+    "correctAnswer": "Christian attitude"
+  },
+  {
+    "question": "The Forest Rights Act was implemented in _____.",
+    "options": [
+      "2006.0",
+      "None of these",
+      "2000.0",
+      "2005.0"
+    ],
+    "correctAnswer": "2006.0"
+  },
+  {
+    "question": "What do you mean by environmental entitlements?",
+    "options": [
+      "Alternative sets of utilities derived from environmental goods and services over which social actors have legitimate effective demand",
+      "Alternative sets of utilities derived from community farming",
+      "None of these",
+      "Utilities derived from the mountainous forests"
+    ],
+    "correctAnswer": "Alternative sets of utilities derived from environmental goods and services over which social actors have legitimate effective demand"
+  },
+  {
+    "question": "The Wildlife (Protection) Act was established in _____.",
+    "options": [
+      "1975.0",
+      "1960.0",
+      "1972.0",
+      "1980.0"
+    ],
+    "correctAnswer": "1972.0"
+  },
+  {
+    "question": "What are the three R’s for environmental preservation?",
+    "options": [
+      "Reduce, recycle and reuse",
+      "Redistribution, resettlement and restoration",
+      "Reduce, reduction and resettlement",
+      "Reuse, reduction and re-settlement"
+    ],
+    "correctAnswer": "Reduce, recycle and reuse"
+  },
+  {
+    "question": "Which of the following statement/s is true about sustainable development?",
+    "options": [
+      "Sustainable development leads to equitable distribution of resources",
+      "Sustainable natural resource management leads to controlled exploitation of resources",
+      "Sustainable development leads to inequitable distribution of resources",
+      "None of these"
+    ],
+    "correctAnswer": "Sustainable natural resource management leads to controlled exploitation of resources"
+  },
+  {
+    "question": "What do you mean by natural resources?",
+    "options": [
+      "All of these",
+      "Resources available in nature",
+      "Naturally occurring substances",
+      "Resources available in unmodified (natural) form"
+    ],
+    "correctAnswer": "All of these"
+  },
+  {
+    "question": "The book ‘Governing the Commons’ was authored by __________.",
+    "options": [
+      "Sonia Altizer",
+      "Elinor Ostrom",
+      "Warder Clyde",
+      "John Alcock"
+    ],
+    "correctAnswer": "Elinor Ostrom"
+  },
+  {
+    "question": "Environmental problems like degradation of forests comes under ____.",
+    "options": [
+      "Economic rights",
+      "Cultural rights",
+      "Human rights",
+      "Property rights problems"
+    ],
+    "correctAnswer": "Property rights problems"
+  },
+  {
+    "question": "Which of the following statement/s is/are true about biodiversity?",
+    "options": [
+      "Biodiversity provides raw material for a diverse medicinal and health care systems",
+      "Biodiversity provides the genetic base for the continuous up-gradation of agriculture and fisheries",
+      "All of these",
+      "Biodiversity provides the base for the livelihoods"
+    ],
+    "correctAnswer": "All of these"
+  },
+  {
+    "question": "What does community-based natural resource management refers to?",
+    "options": [
+      "Financial use of natural resources",
+      "Social use of natural resources",
+      "Community based use and management of natural resources",
+      "Collective use and management of natural resources"
+    ],
+    "correctAnswer": "Collective use and management of natural resources"
+  },
+  {
+    "question": "The ‘Environment Protection Act’ came into existence in ______.",
+    "options": [
+      "1991.0",
+      "1961.0",
+      "1971.0",
+      "1981.0"
+    ],
+    "correctAnswer": "1981.0"
+  },
+  {
+    "question": "When did the Land Acquisition Act for Resettlement and Rehabilitation came into existence?",
+    "options": [
+      "1890.0",
+      "2000.0",
+      "1894.0",
+      "1995.0"
+    ],
+    "correctAnswer": "1894.0"
+  },
+  {
+    "question": "What is the most important critique against displacement?",
+    "options": [
+      "The evacuation of people from their immediate surroundings",
+      "The voluntary evacuation of people from their homes and lands",
+      "All of these",
+      "The injustice involved in the involuntary removal of disadvantaged peoples from their homes and lands"
+    ],
+    "correctAnswer": "The injustice involved in the involuntary removal of disadvantaged peoples from their homes and lands"
+  },
+  {
+    "question": "Which Indian state is home to the Sariska Tiger Reserve?",
+    "options": [
+      "Kerala",
+      "Madhya Pradesh",
+      "Rajasthan",
+      "Uttar Pradesh"
+    ],
+    "correctAnswer": "Rajasthan"
+  },
+  {
+    "question": "The National Environment Policy Act was implemented in ______.",
+    "options": [
+      "1989.0",
+      "1999.0",
+      "1969.0",
+      "1979.0"
+    ],
+    "correctAnswer": "1969.0"
+  },
+  {
+    "question": "Who came up with the idea of ‘Fortress Conservation’?",
+    "options": [
+      "John Muir",
+      "Philip Lake",
+      "E.R. Roe Thompson",
+      "Dan Brockington"
+    ],
+    "correctAnswer": "Dan Brockington"
+  },
+  {
+    "question": "Which step in Environmental Impact Assessment recommends actions to reduce and avoid the adverse environmental consequences of development activities?",
+    "options": [
+      "Preparedness",
+      "Response",
+      "Mitigation",
+      "Recovery"
+    ],
+    "correctAnswer": "Mitigation"
+  },
+  {
+    "question": "Who are the stakeholders in the Environmental Impact Assessment process?",
+    "options": [
+      "Those who propose the project",
+      "Pollution Control Board (State or National)",
+      "The environmental consultant who prepares EIA on behalf of project proponent",
+      "All of these"
+    ],
+    "correctAnswer": "All of these"
+  },
+  {
+    "question": "Who claimed that displacement carried out for development purposes are invariably permanent?",
+    "options": [
+      "Alfred Lothar Wegener",
+      "Jennie E Brand",
+      "Laurie A Brand",
+      "Sarah A Burgard"
+    ],
+    "correctAnswer": "Laurie A Brand"
+  },
+  {
+    "question": "When did EIA (Environmental Impact Assessment) begin in India?",
+    "options": [
+      "1980-82",
+      "1976-77",
+      "1994-96",
+      "2000-02"
+    ],
+    "correctAnswer": "1976-77"
+  },
+  {
+    "question": "Which river in Odisha is referred to be Kalahandi’s ‘life line’?",
+    "options": [
+      "Ganga",
+      "Yamuna",
+      "Ravi",
+      "Vamsadhara"
+    ],
+    "correctAnswer": "Vamsadhara"
+  },
+  {
+    "question": "What is the primary concern surrounding the construction of huge dams?",
+    "options": [
+      "All of these",
+      "Rehabilitation and reconstruction",
+      "Migration and resettlement",
+      "Resettlement and rehabilitation"
+    ],
+    "correctAnswer": "Resettlement and rehabilitation"
+  },
+  {
+    "question": "What effects does resettlement have on indigenous people?",
+    "options": [
+      "Both ‘loss of access to common resources’ and ‘loss of civil and human rights’",
+      "Loss of access to common resources",
+      "Profit in terms of land",
+      "Loss of civil and human rights"
+    ],
+    "correctAnswer": "Both ‘loss of access to common resources’ and ‘loss of civil and human rights’"
+  },
+  {
+    "question": "When was the mineral policy of the central government announced?",
+    "options": [
+      "1993.0",
+      "1990.0",
+      "1992.0",
+      "1991.0"
+    ],
+    "correctAnswer": "1993.0"
+  },
+  {
+    "question": "What are the negative consequences of contemporary mining?",
+    "options": [
+      "All of these",
+      "Land and water contamination",
+      "Clashes between citizens and state forces",
+      "Disruption or displacement of communities"
+    ],
+    "correctAnswer": "All of these"
+  },
+  {
+    "question": "Mining-induced displacement and resettlement is primarily _________ issue.",
+    "options": [
+      "Social",
+      "Economic",
+      "Human rights",
+      "Psychological"
+    ],
+    "correctAnswer": "Economic"
+  },
+  {
+    "question": "Where is the Tipaimukh hydroelectric project proposed to be built?",
+    "options": [
+      "Mekong river",
+      "Barak river",
+      "Brahmaputra river",
+      "Imphal river"
+    ],
+    "correctAnswer": "Barak river"
+  },
+  {
+    "question": "Who claimed that people and their ancestral landscape have spiritual ties?",
+    "options": [
+      "George Ballard",
+      "Vandana Shiva",
+      "A. Baviskar",
+      "Medha Patkar"
+    ],
+    "correctAnswer": "A. Baviskar"
+  },
+  {
+    "question": "When was the world commission on dams formed?",
+    "options": [
+      "2000s",
+      "1980s",
+      "1970s",
+      "1990s"
+    ],
+    "correctAnswer": "2000s"
+  },
+  {
+    "question": "Which region has been identified by the Ministry of Development of North-Eastern Region as the ‘future powerhouse of India’?",
+    "options": [
+      "Mahananda basin",
+      "Ganga basin",
+      "Brahmaputra basin",
+      "Yamuna basin"
+    ],
+    "correctAnswer": "Brahmaputra basin"
+  },
+  {
+    "question": "The second UN Women’s Conference took place when and where?",
+    "options": [
+      "1980, Copenhagen",
+      "1974, Rome",
+      "1985, Nairobi",
+      "1989, Rio"
+    ],
+    "correctAnswer": "1980, Copenhagen"
+  },
+  {
+    "question": "The book Gender, Development and Climate Change is authored by __________.",
+    "options": [
+      "Rachel Masika",
+      "Andrea Dworkin",
+      "Judith Lorber",
+      "Judith Butler"
+    ],
+    "correctAnswer": "Rachel Masika"
+  },
+  {
+    "question": "What is the focal point of modernization theory?",
+    "options": [
+      "Trend towards development theory",
+      "Trend towards western capitalist modernity",
+      "Trend towards third world countries policy",
+      "Trend towards socialist theory"
+    ],
+    "correctAnswer": "Trend towards western capitalist modernity"
+  },
+  {
+    "question": "What does the second Women in Development (WID) approach emphasize on?",
+    "options": [
+      "Development",
+      "Anti-poverty",
+      "Social and physical aspect",
+      "Economic independence"
+    ],
+    "correctAnswer": "Anti-poverty"
+  },
+  {
+    "question": "Who among the following stated that the ‘Green revolution in India, altered the class position of different peasant households and the amount of productive labor undertaken by different groups of women both as unpaid labor within household and as paid labor outside of it’.",
+    "options": [
+      "Ester Boserup",
+      "Mayra Buvinic",
+      "Bina Agarwal",
+      "Georgina Waylen"
+    ],
+    "correctAnswer": "Bina Agarwal"
+  },
+  {
+    "question": "What is ‘Gender and Development’s’ main goal?",
+    "options": [
+      "Mainstreaming both men’s and women’s needs and perspectives",
+      "Mainstreaming men’s needs and perspectives",
+      "All of these",
+      "Mainstreaming women’s needs and perspectives"
+    ],
+    "correctAnswer": "Mainstreaming women’s needs and perspectives"
+  },
+  {
+    "question": "Who asserted that ‘Third World women are seen as the passive objects of policy, not agents of change in their own right’?",
+    "options": [
+      "Vandana Shiva",
+      "Gayatri Spivak",
+      "Asma Mansoor",
+      "Chandra Talpade Mohanty"
+    ],
+    "correctAnswer": "Chandra Talpade Mohanty"
+  },
+  {
+    "question": "As per World Development Bank (2000), what are the factors leading to economic growth and productivity?",
+    "options": [
+      "Equal distribution of resources among the community",
+      "All of these",
+      "Equal distribution of resources among women",
+      "Equal distribution of opportunities and resources between men and women"
+    ],
+    "correctAnswer": "Equal distribution of opportunities and resources between men and women"
+  },
+  {
+    "question": "What does the third wave of feminism discussed?",
+    "options": [
+      "Local and diverse voices of feminism",
+      "The social and economic upliftment of feminists",
+      "Universalistic perspective on a single feminist standpoint",
+      "Both local and universal perspectives on feminism"
+    ],
+    "correctAnswer": "Local and diverse voices of feminism"
+  },
+  {
+    "question": "The central goal of all the Sustainable Development Goals (SDGs) is ______.",
+    "options": [
+      "All of these",
+      "Development of women",
+      "Community development",
+      "Gender equality"
+    ],
+    "correctAnswer": "Gender equality"
+  },
+  {
+    "question": "The Energy Conservation Act of 2001 provides:",
+    "options": [
+      "A legal mandate for the formulation of energy efficiency measures through the mechanisms of the Bureau of Energy Efficiency (BEE)",
+      "A legal mandate for the implementation of energy efficiency measures through the mechanisms of the Bureau of Energy Efficiency (BEE)",
+      "A legal mandate for the implementation of energy efficiency measures through the mechanisms of the National Green Tribunal (NGT)",
+      "A legal mandate for the formulation of energy efficiency measures through the mechanisms of the National Green Tribunal (NGT)"
+    ],
+    "correctAnswer": "A legal mandate for the implementation of energy efficiency measures through the mechanisms of the Bureau of Energy Efficiency (BEE)"
+  },
+  {
+    "question": "Which of the following was identified by the Millennium Ecosystem Assessment (MEA)?",
+    "options": [
+      "Climate change as one of the major drivers having adverse effects on biodiversity and associated humans",
+      "Climate change as one of the major drivers having adverse effects on biodiversity and associated stake holders",
+      "Climate change as one of the major drivers having adverse effects on biodiversity and associated species",
+      "Climate change as one of the major drivers having adverse effects on biodiversity and associated goods and services"
+    ],
+    "correctAnswer": "Climate change as one of the major drivers having adverse effects on biodiversity and associated goods and services"
+  },
+  {
+    "question": "What are the two main reasons for the rise in global sea levels?",
+    "options": [
+      "Earthquakes and floods",
+      "Thermal expansion and loss of land-based ice",
+      "Flooding and erosion of coastal areas",
+      "Forest fires and wild fires"
+    ],
+    "correctAnswer": "Thermal expansion and loss of land-based ice"
+  },
+  {
+    "question": "The Intergovernmental Panel on Climate Change (IPCC) was established in ______.",
+    "options": [
+      "1992.0",
+      "1972.0",
+      "1988.0",
+      "1985.0"
+    ],
+    "correctAnswer": "1988.0"
+  },
+  {
+    "question": "The 1987 Montreal Protocol placed emphasis on:",
+    "options": [
+      "Restricting chemicals that pollute water",
+      "Restricting chemicals that damage the soil",
+      "Restricting chemicals that damage the agricultural crops",
+      "Restricting chemicals that damage the ozone layer"
+    ],
+    "correctAnswer": "Restricting chemicals that damage the ozone layer"
+  },
+  {
+    "question": "Which of the following statement is true about climate?",
+    "options": [
+      "It is the average of weather over time and space",
+      "It consists of many kinds of weather events, their periodicities, intensities, and nature of dynamism",
+      "It is the average daily weather for an extended period of time at a certain location",
+      "It reflects short term conditions of the atmosphere"
+    ],
+    "correctAnswer": "It is the average daily weather for an extended period of time at a certain location"
+  },
+  {
+    "question": "What was the subject of the National Action Plan on Climate Change (NAPCC)?",
+    "options": [
+      "Measures on climate change related adaptation and mitigation while simultaneously advancing development",
+      "Measures on climate change related adaptation",
+      "None of these",
+      "Measures on climate change related mitigation"
+    ],
+    "correctAnswer": "Measures on climate change related adaptation and mitigation while simultaneously advancing development"
+  },
+  {
+    "question": "What does the term ‘adaptation’ indicate in climate change?",
+    "options": [
+      "A process by which individuals, communities and countries seek to cope with the consequences of climate change",
+      "A process by which individuals, communities and countries seek to communicate the risks of climate change",
+      "A process by which individuals, communities and countries seek to reduce the risks of climate change",
+      "A process by which individuals, communities and countries seek to alleviate the consequences of climate change"
+    ],
+    "correctAnswer": "A process by which individuals, communities and countries seek to cope with the consequences of climate change"
+  },
+  {
+    "question": "The earth’s temperature depends on:",
+    "options": [
+      "Released energy from the earth",
+      "All of these",
+      "Incoming energy from the sun",
+      "The balance between energy entering and leaving the planet’s system"
+    ],
+    "correctAnswer": "The balance between energy entering and leaving the planet’s system"
+  },
+  {
+    "question": "Intergovernmental Panel on Climate Change (IPCC) was formed jointly by ___________.",
+    "options": [
+      "United National Development Programme and World Meteorological Organization",
+      "World Pollution Panel and United Nations Environment Programme",
+      "United Nation Environment Programme and World Meteorological Organization",
+      "World Meteorological Organization and United National Development Programme"
+    ],
+    "correctAnswer": "United Nation Environment Programme and World Meteorological Organization"
+  },
+  {
+    "question": "Which animal is considered as the sacred ‘Vohpi’ among the Kuki community?",
+    "options": [
+      "Cow",
+      "Pig",
+      "Elephant",
+      "Goat"
+    ],
+    "correctAnswer": "Pig"
+  },
+  {
+    "question": "Which ritual is known as the greatest feast among the Kuki community?",
+    "options": [
+      "Khelhei-Khai",
+      "Siel-meilah",
+      "Chon ritual",
+      "Ai-saan"
+    ],
+    "correctAnswer": "Chon ritual"
+  },
+  {
+    "question": "Which of the following statements regarding the subsistence economy is untrue?",
+    "options": [
+      "It is based on consistent income from sources such as agriculture, NTFPs and sale of medicinal herbs",
+      "Subsistence economy is directed to market and is based on industrialization",
+      "Economic surplus is minimal and only used to trade for basic goods, and there is no industrialization",
+      "It is directed to basic subsistence rather than to market"
+    ],
+    "correctAnswer": "Subsistence economy is directed to market and is based on industrialization"
+  },
+  {
+    "question": "Kuki tribal religious beliefs and practices are influenced by their __________.",
+    "options": [
+      "Psychological space",
+      "Political institution",
+      "Social milieu",
+      "Natural environment"
+    ],
+    "correctAnswer": "Natural environment"
+  },
+  {
+    "question": "What do the sacred groves represent?",
+    "options": [
+      "Natural vegetation dedicated by local communities to the industries",
+      "All of these",
+      "Natural vegetation dedicated by local communities to ancestral spirit or deities",
+      "Modern means of biodiversity"
+    ],
+    "correctAnswer": "Natural vegetation dedicated by local communities to ancestral spirit or deities"
+  },
+  {
+    "question": "What distinguishes ‘formal knowledge’ from ‘traditional ecological knowledge’?",
+    "options": [
+      "Both formal knowledge and traditional ecological knowledge are based on experiences",
+      "Formal knowledge is based on experiential process, while traditional ecological knowledge is textbook-based",
+      "Formal knowledge is based on textbooks, while the traditional ecological knowledge derived through an experiential process",
+      "Both formal knowledge and traditional knowledge are textbook-based"
+    ],
+    "correctAnswer": "Formal knowledge is based on textbooks, while the traditional ecological knowledge derived through an experiential process"
+  },
+  {
+    "question": "Which of the following statements are not true about Kuki people?",
+    "options": [
+      "The Kuki land and resource use are influenced by their natural environment",
+      "They believe that mankind co-exists with supernatural spirits and maintain a symbiotic relationship with them",
+      "They believe that there is an economic relationship between mankind and supernatural spirits",
+      "They have a spiritual connection with, and are linked in a ‘natural’ way to the land they live in and have special responsibilities"
+    ],
+    "correctAnswer": "They believe that there is an economic relationship between mankind and supernatural spirits"
+  },
+  {
+    "question": "Which of the following objects is considered ‘sacred’ and capable of protecting a person from harmful external influence by Kuki community?",
+    "options": [
+      "Ai (turmeric)",
+      "Rice",
+      "Rice beer",
+      "Thiing (ginger)"
+    ],
+    "correctAnswer": "Thiing (ginger)"
+  },
+  {
+    "question": "Which of the following claims regarding mountain communities is untrue?",
+    "options": [
+      "They have an atomistic view of the social and ecological system",
+      "They depend upon the natural resources in general",
+      "social, cultural and spiritual dimensions also play a significant role",
+      "Mountain societies are characterized by the close interconnection",
+      "Their relationship extends beyond the biophysical ecology"
+    ],
+    "correctAnswer": "They have an atomistic view of the social and ecological system"
+  },
+  {
+    "question": "What does traditional beliefs and practices indicate?",
+    "options": [
+      "Scientific relationship of humans and nature",
+      "Symbiotic relationship of humans and nature",
+      "Economical relationship of humans and nature",
+      "Social relationship of humans and nature"
+    ],
+
+    "correctAnswer": "Symbiotic relationship of humans and nature"
+  },
+  {
+    "question": "What is jhumming?",
+    "options": [
+      "It is basically a traditional farming system that involves the terrace cultivation of an area",
+      "It is basically a traditional farming system that involves the rotational cultivation of an area",
+      "It is basically a modern farming system that involves the terrace cultivation of an area",
+      "It is basically a modern farming system that involves the rotational cultivation of an area"
+    ],
+    "correctAnswer": "It is basically a traditional farming system that involves the rotational cultivation of an area"
+  },
+  {
+    "question": "The Chang-nungah poh ritual is performed by the Kuki Community:",
+    "options": [
+      "To appease the souls of the paddy crop",
+      "To appease the souls of the millet",
+      "To appease the souls of their ancestors",
+      "To appease the souls of trees"
+    ],
+    "correctAnswer": "To appease the souls of the paddy crop"
+  },
+  {
+    "question": "The term ‘indigenous knowledge’ as defined by Ellen and Harris (2000) mean:",
+    "options": [
+      "All of these",
+      "The knowledge of a group of people local to a given situation, sometimes used interchangeably with local knowledge",
+      "The common sensical knowledge of a group of people to a given situation, sometimes used interchangeably with common sensical knowledge",
+      "The knowledge of a group of scientists to a given situation, sometimes used interchangeably with scientific knowledge"
+    ],
+    "correctAnswer": "The knowledge of a group of people local to a given situation, sometimes used interchangeably with local knowledge"
+  },
+  {
+    "question": "What distinguishes ‘life projects’ from ‘development projects’ in particular?",
+    "options": [
+      "Development projects takes into account the place perspectives and life projects are universal in nature",
+      "None of these",
+      "Life projects takes into account the place perspectives and development projects are universal in nature",
+      "Development projects takes into account the ecological perspectives and life projects are universal in nature"
+    ],
+    "correctAnswer": "Life projects takes into account the place perspectives and development projects are universal in nature"
+  },
+  {
+    "question": "Development as a practice and discourse embodies the _____________ implicit project of making specific local worldviews and values.",
+    "options": [
+      "Chinese Enlightenment’s",
+      "Asian Enlightenment’s",
+      "American Enlightenment’s",
+      "European Enlightenment’s"
+    ],
+    "correctAnswer": "European Enlightenment’s"
+  },
+  {
+    "question": "What was the main objective of the World Commission on Environment and Development (WCED)?",
+    "options": [
+      "To enquire into environmental issues in developing countries",
+      "All of these",
+      "To enquire into environmental issues in developed countries",
+      "To enquire into environmental issues in developed and developing countries"
+    ],
+    "correctAnswer": "To enquire into environmental issues in developing countries"
+  },
+  {
+    "question": "Which of the following statements on Gleb Raygorodetsky’s (1994) observations regarding traditional environmental knowledge is untrue?",
+    "options": [
+      "The closest scientific equivalent of the Land, taken without its spiritual component, is ecosystem",
+      "Knowledge is separable from the land",
+      "Spiritual and ethical values have been woven into this traditional environmental knowledge",
+      "The term land is not restricted to the physical environment only"
+    ],
+    "correctAnswer": "Knowledge is separable from the land"
+  },
+  {
+    "question": "Which of the following statement/s is/are true about Kukis’ association with land and forest?",
+    "options": [
+      "Land is inextricably linked to the Kuki’s material and spiritual world",
+      "Kuki social and cultural system and identity are closely linked with land and forests",
+      "All of these",
+      "Kuki historical root is also strongly linked with the land that they live on"
+    ],
+    "correctAnswer": "All of these"
+  },
+  {
+    "question": "Modern technology is always applied in specific ___________ which determine its outcome.",
+    "options": [
+      "Social conditions",
+      "Scientific conditions",
+      "Natural conditions",
+      "None of these"
+    ],
+    "correctAnswer": "Social conditions"
+  },
+  {
+    "question": "What are the two kinds of ‘threads’ that shapes a place?",
+    "options": [
+      "Vertical and horizontal",
+      "Perpendicular and cross-cutting",
+      "Top and bottom",
+      "Centre and periphery"
+    ],
+    "correctAnswer": "Vertical and horizontal"
+  }
+]
