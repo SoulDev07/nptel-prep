@@ -9,7 +9,6 @@ export default function QuestionCard({
     <div className="card" aria-live="polite">
       <div className="q-top">
         <div className="q-count">Question</div>
-        <div style={{ color: "var(--muted)", fontSize: 13 }}>Practice · Instant feedback</div>
       </div>
 
       <div className="question" dangerouslySetInnerHTML={{ __html: qitem.question }} />

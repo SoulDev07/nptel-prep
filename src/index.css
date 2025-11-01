@@ -270,9 +270,132 @@ body{
   gap:12px;
 }
 
+/* header responsive tweaks */
+.header {
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:6px;
+}
+
+/* provide base classes for logo/score/actions for easier overrides */
+.logo { flex: 0 0 auto; }
+.header-actions { display:flex; align-items:center; gap:12px; }
+
+/* Mobile adjustments: stack header, shrink logo, make actions full width */
+@media (max-width:640px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .logo {
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 10px !important;
+    align-self: flex-start;
+  }
+
+  .title {
+    order: 1;
+    width: 100%;
+    min-width: 0;
+  }
+  .title h1 { font-size: 16px; margin:0 }
+  .title p { font-size: 12px; margin:0; color:var(--muted) }
+
+  .header-actions {
+    order: 2;
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 6px;
+  }
+
+  .header-actions .score-block {
+    text-align: left;
+    min-width: auto;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+
+  /* make progress bar smaller on phones */
+  .progress-wrap { flex:1; gap:8px; }
+  .progress-bar { height:10px; }
+
+  /* adjust restart button to be compact */
+  .header-actions .btn { padding:8px 10px; font-size:13px; }
+}
+
 /* responsiveness */
 @media (max-width:1000px){
   .app { width: calc(100% - 20px); margin:10px; padding:14px }
   .question{ font-size:18px }
   .option .dot{ width:34px; height:34px; border-radius:8px }
+}
+
+/* responsiveness improvements and mobile-friendly tweaks */
+@media (max-width:900px){
+  .app{ margin:10px; padding:14px }
+  .question{ font-size:18px }
+  .option .dot{ width:34px; height:34px; border-radius:8px }
+}
+
+/* stronger mobile layout at phone sizes */
+@media (max-width:640px){
+  .app {
+    width: 100%;
+    margin: 0;
+    padding: 16px;
+    border-radius: 0;
+    min-height: 100vh;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .header .title {
+    order: 1;
+    width: 100%;
+  }
+
+  .header .title h1{ font-size:16px; }
+  .header .title p{ font-size:12px; color:var(--muted) }
+
+  /* place score + controls on their own responsive row */
+  .header > div:last-child {
+    order: 2;
+    width: 100%;
+    display:flex;
+    gap:10px;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .progress-wrap { gap:8px }
+  .progress-bar { height:10px }
+
+  /* make options larger and easier to tap */
+  .options { gap:12px }
+  .option {
+    padding:16px;
+    border-radius:12px;
+    font-size:15px;
+  }
+  .option .dot { width:36px; height:36px }
+
+  /* actions row stacks on small screens */
+  .actions { flex-direction:column; align-items:stretch; gap:10px }
+  .actions > div { display:flex; gap:8px; justify-content:space-between; align-items:center }
+  .btn { width:100%; }
+  .btn.small { width:auto; }
+
+  .summary { flex-direction:column; align-items:flex-start; gap:6px; font-size:13px }
 }
