@@ -16,16 +16,11 @@
       <stop offset="100%" stop-color="#0f172a"/>
     </linearGradient>
 
-    <!-- Logo gradient -->
-    <linearGradient id="blueGreen" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#06b6d4"/>
-      <stop offset="100%" stop-color="#10b981"/>
-    </linearGradient>
+    
 
     <!-- Glow for logo -->
     <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
-      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#06b6d4" flood-opacity="0.35"/>
-      <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#10b981" flood-opacity="0.25"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#0cb79f" flood-opacity="0.35"/>
     </filter>
   </defs>
 
@@ -48,7 +43,7 @@
         <!-- Abstract energy monogram -->
         <path
           d="M40 90V38c0-4 3-8 8-8h0c3 0 6 1.5 8 4l24 32V38h12v52c0 4-3 8-8 8h0c-3 0-6-1.5-8-4L52 62v28h-12z"
-          fill="url(#blueGreen)"
+          fill="#0cb79f"
           filter="url(#glow)"
           transform="translate(0,0) scale(1.2)"
         />
@@ -56,7 +51,7 @@
         <circle 
           cx="64" cy="64" r="48" 
           fill="none" 
-          stroke="url(#blueGreen)" 
+          stroke="#0cb79f" 
           stroke-width="3" 
           opacity="0.25"
           transform="translate(0,0) scale(1.2)"
@@ -64,7 +59,7 @@
         <!-- Central spark -->
         <circle 
           cx="64" cy="64" r="5" 
-          fill="url(#blueGreen)" 
+          fill="#0cb79f" 
           opacity="0.9"
           transform="translate(0,0) scale(1.2)"
         />
