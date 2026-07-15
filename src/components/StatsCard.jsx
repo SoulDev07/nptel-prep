@@ -1,60 +1,57 @@
-import React from "react";
-
-export default function StatsCard({
-  total = 0,
-  done = 0,
-  correct = 0,
-  progressPct = 0,
-  accuracyPct = 0,
-  onRestart = () => {},
-  onReview = () => {},
-}) {
+export default function StatsCard({ stats, onRestart, onReview, onRetryMissed }) {
   return (
-    <div className="card stats-card" role="status" aria-live="polite">
+    <section className="card stats-card" role="status" aria-live="polite">
       <div className="stats-header">
         <h2>Session complete</h2>
-        <p className="small-muted">Good work — review your session or restart for a new shuffled run.</p>
+        <p className="small-muted">Review missed questions or retry the ones that need more work.</p>
       </div>
 
-      <div className="stats-grid" aria-hidden>
+      <div className="stats-grid">
         <div className="stat">
-          <div className="stat-value">{done}</div>
-          <div className="stat-label">Answered</div>
+          <div className="stat-value">{stats.attempted}</div>
+          <div className="stat-label">Attempted</div>
         </div>
         <div className="stat">
-          <div className="stat-value">{correct}</div>
+          <div className="stat-value">{stats.correct}</div>
           <div className="stat-label">Correct</div>
         </div>
         <div className="stat">
-          <div className="stat-value">{total}</div>
-          <div className="stat-label">Total</div>
+          <div className="stat-value">{stats.skipped}</div>
+          <div className="stat-label">Skipped</div>
         </div>
         <div className="stat pct">
-          <div className="stat-value">{accuracyPct}%</div>
+          <div className="stat-value">{stats.accuracyPct}%</div>
           <div className="stat-label">Accuracy</div>
         </div>
       </div>
 
-      <div className="stats-bar" aria-hidden>
-        <div className="progress-bar small" style={{ height: 10, marginTop: 8 }}>
-          <i style={{ width: `${progressPct}%`, borderRadius: 999 }} />
+      <div className="stats-bar">
+        <div
+          className="progress-bar small"
+          role="progressbar"
+          aria-label="Completion progress"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={stats.progressPct}
+        >
+          <i style={{ width: `${stats.progressPct}%` }} />
         </div>
-        <div style={{ marginTop: 8, color: "var(--muted)", fontSize: 13 }}>
-          Progress: {progressPct}% ({done}/{total})
+        <div className="muted-line">
+          Completion: {stats.progressPct}% ({stats.attempted}/{stats.total}) · Unanswered: {stats.unanswered}
         </div>
       </div>
 
-      <div className="stats-actions" style={{ marginTop: 16 }}>
-        <div />
-        <div style={{ display: "flex", gap: 8 }}>
-          <button className="btn small" onClick={onReview}>
-            Review
-          </button>
-          <button className="btn primary big-cta" onClick={onRestart}>
-            Restart
-          </button>
-        </div>
+      <div className="stats-actions">
+        <button className="btn small" type="button" onClick={onReview}>
+          Review
+        </button>
+        <button className="btn small" type="button" onClick={onRetryMissed} disabled={stats.incorrect + stats.skipped === 0}>
+          Retry missed
+        </button>
+        <button className="btn primary big-cta" type="button" onClick={onRestart}>
+          Restart
+        </button>
       </div>
-    </div>
+    </section>
   );
 }

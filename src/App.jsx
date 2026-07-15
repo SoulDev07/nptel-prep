@@ -1,238 +1,292 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import data from "./assets/data.json";
-import QuestionCard from "./components/QuestionCard";
 import Header from "./components/Header";
-import useKeyboard from "./hooks/useKeyboard";
+import InvalidData from "./components/InvalidData";
+import QuestionCard from "./components/QuestionCard";
+import ReviewPanel from "./components/ReviewPanel";
 import StatsCard from "./components/StatsCard";
+import useKeyboard from "./hooks/useKeyboard";
+import {
+  ANSWER_STATUS,
+  buildAnswer,
+  calculateStats,
+  createDataSignature,
+  createInitialSession,
+  loadSession,
+  saveSession,
+  validateQuestions,
+} from "./utils";
 
-import { shuffleIndices, loadState, saveState } from "./utils";
+function makeSession(total, dataSignature) {
+  return loadSession(total, dataSignature) || createInitialSession(total);
+}
+
+function getInitialTheme() {
+  const saved = globalThis.localStorage?.getItem("nptel_prep_theme");
+  if (saved === "light" || saved === "dark") return saved;
+  return globalThis.matchMedia?.("(prefers-color-scheme: dark)")?.matches ? "dark" : "light";
+}
 
 export default function App() {
-  const total = data.length;
-  const [order, setOrder] = useState(() => shuffleIndices(total));
-  const [index, setIndex] = useState(0);
-  const [answers, setAnswers] = useState({});
-  const [reveal, setReveal] = useState(false);
-  const [finished, setFinished] = useState(false); // new state
-  const [hydrated, setHydrated] = useState(false); // <- new: prevent initial overwrite of stored state
+  const { questions, errors } = useMemo(() => {
+    const result = validateData(data);
+    return result;
+  }, []);
+  const total = questions.length;
+  const dataSignature = useMemo(() => createDataSignature(questions), [questions]);
+  const [session, setSession] = useState(() => makeSession(total, dataSignature));
+  const [view, setView] = useState("quiz");
+  const [reviewFilter, setReviewFilter] = useState("all");
+  const [showHelp, setShowHelp] = useState(false);
+  const [theme, setTheme] = useState(getInitialTheme);
 
   useEffect(() => {
-    const s = loadState();
-    if (s && s.order && Array.isArray(s.order) && s.order.length === total) {
-      setOrder(s.order);
-      setIndex(Math.min(s.index || 0, total - 1));
-      setAnswers(s.answers || {});
-    } else {
-      const o = shuffleIndices(total);
-      setOrder(o);
-      saveState({ order: o, index: 0, answers: {} });
-    }
-    // mark hydration requested; setHydrated(true) ensures subsequent saves persist current app state
-    setHydrated(true);
-    // eslint-disable-next-line
+    if (errors.length === 0) saveSession(session, dataSignature);
+  }, [dataSignature, errors.length, session]);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    globalThis.localStorage?.setItem("nptel_prep_theme", theme);
+  }, [theme]);
+
+  const stats = useMemo(() => calculateStats(total, session.answers), [session.answers, total]);
+  const qIndex = session.order[session.index];
+  const current = questions[qIndex];
+  const answered = session.answers[qIndex];
+
+  const updateSession = useCallback((updater) => {
+    setSession((prev) => ({ ...prev, ...updater(prev) }));
   }, []);
 
-  useEffect(() => {
-    // don't persist until we've performed initial load (avoid overwriting saved state on mount)
-    if (!hydrated) return;
-    saveState({ order, index, answers });
-  }, [order, index, answers, hydrated]);
+  const goToQuestionIndex = useCallback(
+    (questionIndex) => {
+      setSession((prev) => {
+        const existingIndex = prev.order.indexOf(questionIndex);
+        const nextOrder = existingIndex === -1 ? [questionIndex, ...prev.order] : prev.order;
+        const nextIndex = existingIndex === -1 ? 0 : existingIndex;
+        return { ...prev, order: nextOrder, index: nextIndex };
+      });
+      setView("quiz");
+    },
+    [setView],
+  );
 
-  // keep 'reveal' in sync with the currently selected question:
-  // reveal should be true when that question has a recorded chosen value (non-null),
-  // otherwise false (this allows reattempts when chosen === null).
-  useEffect(() => {
-    const qIndexForReveal = order[index];
-    if (qIndexForReveal == null) return;
-    const a = answers[qIndexForReveal];
-    setReveal(Boolean(a && a.chosen != null));
-  }, [index, order, answers]);
+  const toggleBookmark = useCallback((questionIndex) => {
+    updateSession((prev) => {
+      const bookmarks = { ...prev.bookmarks };
+      if (bookmarks[questionIndex]) delete bookmarks[questionIndex];
+      else bookmarks[questionIndex] = true;
+      return { bookmarks };
+    });
+  }, [updateSession]);
 
-  const qIndex = order[index];
-  const current = data[qIndex];
+  const handleAnswer = useCallback(
+    (chosen) => {
+      if (!current || answered) return;
+      updateSession((prev) => ({
+        answers: {
+          ...prev.answers,
+          [qIndex]: buildAnswer(current, chosen),
+        },
+      }));
+    },
+    [answered, current, qIndex, updateSession],
+  );
 
-  // plain functions (no useCallback)
-  function handleAnswer(chosen) {
-    if (!current) return;
-    const isCorrect = String(chosen) === String(current.correctAnswer);
-    const nextAnswers = { ...answers, [qIndex]: { chosen, correct: isCorrect } };
-    setAnswers(nextAnswers);
-    setReveal(true);
-  }
+  const skipCurrent = useCallback(() => {
+    if (!current || answered) return;
+    updateSession((prev) => ({
+      answers: {
+        ...prev.answers,
+        [qIndex]: buildAnswer(current, null),
+      },
+    }));
+  }, [answered, current, qIndex, updateSession]);
 
-  function next() {
-    if (index < total - 1) {
-      setIndex((i) => i + 1);
-    } else {
-      setFinished(true); // reached end -> show final stats
-    }
-  }
+  const finishSession = useCallback(() => {
+    setSession((prev) => ({
+      ...prev,
+      history: [
+        ...prev.history.slice(-9),
+        {
+          completedAt: new Date().toISOString(),
+          stats: calculateStats(total, prev.answers),
+        },
+      ],
+    }));
+    setView("stats");
+  }, [total]);
 
-  function prev() {
-    if (index > 0) {
-      setIndex((i) => i - 1);
-      setFinished(false); // leaving final screen if navigating back
-    }
-  }
+  const next = useCallback(() => {
+    setSession((prev) => {
+      if (prev.index < prev.order.length - 1) return { ...prev, index: prev.index + 1 };
+      return prev;
+    });
+    if (session.index >= session.order.length - 1) finishSession();
+  }, [finishSession, session.index, session.order.length]);
 
-  function restart() {
-    const o = shuffleIndices(total);
-    setOrder(o);
-    setIndex(0);
-    setAnswers({});
-    setReveal(false);
-    setFinished(false); // ensure finished cleared
-    saveState({ order: o, index: 0, answers: {} });
-  }
+  const prev = useCallback(() => {
+    setSession((currentSession) => ({
+      ...currentSession,
+      index: Math.max(currentSession.index - 1, 0),
+    }));
+    setView("quiz");
+  }, []);
 
-  function answerByIndex(optIdx) {
-    // allow numeric answer only when question is not already answered (chosen != null)
-    const alreadyAnswered = answers[qIndex] && answers[qIndex].chosen != null;
-    if (
-      current &&
-      Array.isArray(current.options) &&
-      current.options[optIdx] != null &&
-      !reveal &&
-      !alreadyAnswered
-    ) {
-      handleAnswer(current.options[optIdx]);
-    }
-  }
+  const skipAndNext = useCallback(() => {
+    skipCurrent();
+    next();
+  }, [next, skipCurrent]);
 
-  // focus movement helper (keeps existing behavior)
-  function focusOption(direction) {
-    try {
-      const opts = Array.from(document.querySelectorAll(".card .options .option"));
-      if (!opts.length) return;
-      const active = document.activeElement;
-      let idx = opts.indexOf(active);
-      if (idx === -1) {
-        idx = direction > 0 ? 0 : opts.length - 1;
-        opts[idx].focus();
-        return;
-      }
-      let nextIdx = idx + direction;
-      if (nextIdx < 0) nextIdx = 0;
-      if (nextIdx > opts.length - 1) nextIdx = opts.length - 1;
-      opts[nextIdx].focus();
-    } catch (err) {
-      /* ignore */
-    }
-  }
+  const restart = useCallback(() => {
+    const shouldRestart = stats.attempted === 0 || window.confirm("Restart this session and clear current progress?");
+    if (!shouldRestart) return;
+    setSession({ ...createInitialSession(total), dataSignature });
+    setView("quiz");
+    setReviewFilter("all");
+  }, [dataSignature, stats.attempted, total]);
 
-  // Setup keyboard handlers via modular hook (includes 'R' for restart)
+  const retryMissed = useCallback(() => {
+    const missed = questions
+      .map((_, index) => index)
+      .filter((index) => {
+        const status = session.answers[index]?.status;
+        return status === ANSWER_STATUS.INCORRECT || status === ANSWER_STATUS.SKIPPED;
+      });
+
+    if (missed.length === 0) return;
+
+    setSession((prev) => {
+      const answers = { ...prev.answers };
+      missed.forEach((index) => {
+        delete answers[index];
+      });
+      return { ...prev, order: missed, index: 0, answers };
+    });
+    setView("quiz");
+  }, [questions, session.answers]);
+
+  const answerByIndex = useCallback(
+    (optIdx) => {
+      if (current?.options[optIdx] != null && !answered) handleAnswer(current.options[optIdx]);
+    },
+    [answered, current, handleAnswer],
+  );
+
+  const focusOption = useCallback((direction) => {
+    const opts = Array.from(document.querySelectorAll(".option"));
+    if (!opts.length) return;
+    const active = document.activeElement;
+    let index = opts.indexOf(active);
+    if (index === -1) index = direction > 0 ? -1 : opts.length;
+    opts[Math.min(Math.max(index + direction, 0), opts.length - 1)]?.focus();
+  }, []);
+
   useKeyboard({
     onPrev: prev,
-    onNext: () => {
-      // mimic Next button behavior
-      if (reveal) next();
-      else {
-        if (!answers[qIndex]) {
-          setAnswers((prev) => ({ ...prev, [qIndex]: { chosen: null, correct: false } }));
-        }
-        next();
-      }
-    },
+    onNext: answered ? next : skipAndNext,
     onAnswerByIndex: answerByIndex,
-    onFocusMove: (dir) => focusOption(dir),
-    onSelectFocused: () => {
-      const active = document.activeElement;
-      if (active && active.classList && active.classList.contains("option") && !reveal) {
-        active.click();
-      }
-    },
+    onFocusMove: focusOption,
     onRestart: restart,
+    onHelp: () => setShowHelp(true),
   });
 
-  const doneCount = Object.keys(answers).length;
-  const correctCount = Object.values(answers).filter((a) => a.correct).length;
-  // separate progress % (how many answered) and accuracy % (correct of answered)
-  const progressPct = total === 0 ? 0 : Math.round((doneCount / total) * 100);
-  const accuracyPct = doneCount === 0 ? 0 : Math.round((correctCount / doneCount) * 100);
+  if (errors.length > 0) return <InvalidData errors={errors} />;
 
   return (
     <div className="app">
       <Header
         total={total}
-        correctCount={correctCount}
-        doneCount={doneCount}
-        index={index}
-        answers={answers}
-        order={order}
+        stats={stats}
+        answers={session.answers}
+        theme={theme}
+        onToggleTheme={() => setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"))}
         onRestart={restart}
+        onReview={() => setView("review")}
       />
 
-      <div style={{ marginTop: 8 }}>
-        {finished ? (
-          <StatsCard
-            total={total}
-            done={doneCount}
-            correct={correctCount}
-            progressPct={progressPct}
-            accuracyPct={accuracyPct}
-            onRestart={restart}
-            onReview={() => {
-              setFinished(false);
-              setIndex(0);
-            }}
+      {view === "stats" ? (
+        <StatsCard stats={stats} onRestart={restart} onReview={() => setView("review")} onRetryMissed={retryMissed} />
+      ) : view === "review" ? (
+        <ReviewPanel
+          questions={questions}
+          answers={session.answers}
+          bookmarks={session.bookmarks}
+          filter={reviewFilter}
+          onFilterChange={setReviewFilter}
+          onBack={() => setView("quiz")}
+          onJumpToQuestion={goToQuestionIndex}
+          onToggleBookmark={toggleBookmark}
+        />
+      ) : current ? (
+        <>
+          <QuestionCard
+            qitem={current}
+            onAnswer={handleAnswer}
+            answered={answered}
+            isBookmarked={Boolean(session.bookmarks[qIndex])}
+            onToggleBookmark={() => toggleBookmark(qIndex)}
           />
-        ) : current ? (
-          <>
-            <QuestionCard qitem={current} onAnswer={handleAnswer} answered={answers[qIndex]} reveal={reveal} />
 
-            <div className="actions">
-              <div>
-                <button className="btn small" onClick={prev} disabled={index === 0}>
-                  Prev
-                </button>
-                <button
-                  className="btn small"
-                  onClick={() => {
-                    if (!answers[qIndex]) {
-                      setAnswers((prev) => ({ ...prev, [qIndex]: { chosen: null, correct: false } }));
-                    }
-                    next();
-                  }}
-                  style={{ marginLeft: 8 }}
-                >
-                  Skip / Next
-                </button>
-              </div>
-
-              <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                <button
-                  className="btn primary"
-                  onClick={() => {
-                    if (reveal) next();
-                    else {
-                      if (!answers[qIndex]) {
-                        setAnswers((prev) => ({ ...prev, [qIndex]: { chosen: null, correct: false } }));
-                      }
-                      next();
-                    }
-                  }}
-                >
-                  {index === total - 1 ? "Finish" : reveal ? "Next" : "Next"}
-                </button>
-              </div>
+          <div className="actions">
+            <button className="btn small" type="button" onClick={prev} disabled={session.index === 0}>
+              Prev
+            </button>
+            <div className="action-group">
+              <button className="btn small" type="button" onClick={skipAndNext} disabled={Boolean(answered)}>
+                Skip
+              </button>
+              <button className="btn primary" type="button" onClick={next}>
+                {session.index === session.order.length - 1 ? "Finish" : "Next"}
+              </button>
             </div>
-
-            <div className="summary">
-              <div>
-                Answered: {doneCount} · Correct: {correctCount}
-              </div>
-              <div style={{ color: "var(--muted)" }}>
-                Q {index + 1} / {total}
-              </div>
-            </div>
-          </>
-        ) : (
-          <div className="card">
-            <div style={{ fontSize: 18, fontWeight: 700 }}>No questions found</div>
-            <p style={{ color: "var(--muted)" }}>Make sure src/assets/data.json has some questions.</p>
           </div>
-        )}
-      </div>
+
+          <div className="summary">
+            <div>
+              Attempted: {stats.attempted} · Correct: {stats.correct} · Skipped: {stats.skipped}
+            </div>
+            <div>
+              Q {session.index + 1} / {session.order.length}
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className="card empty-state">No questions found.</div>
+      )}
+
+      {showHelp ? (
+        <div className="modal-backdrop" role="presentation" onClick={() => setShowHelp(false)}>
+          <section className="help-dialog" role="dialog" aria-modal="true" aria-labelledby="help-title" onClick={(event) => event.stopPropagation()}>
+            <h2 id="help-title">Keyboard shortcuts</h2>
+            <dl>
+              <div>
+                <dt>1-5</dt>
+                <dd>Choose an answer</dd>
+              </div>
+              <div>
+                <dt>W / S</dt>
+                <dd>Move option focus</dd>
+              </div>
+              <div>
+                <dt>A / D</dt>
+                <dd>Previous or next</dd>
+              </div>
+              <div>
+                <dt>R</dt>
+                <dd>Restart with confirmation</dd>
+              </div>
+            </dl>
+            <button className="btn primary" type="button" onClick={() => setShowHelp(false)}>
+              Close
+            </button>
+          </section>
+        </div>
+      ) : null}
     </div>
   );
+}
+
+function validateData(rawData) {
+  return validateQuestions(rawData);
 }

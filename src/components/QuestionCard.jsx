@@ -1,61 +1,72 @@
-export default function QuestionCard({
-  qitem,
-  onAnswer,
-  answered, // { chosen, correct } or undefined
-  reveal,
-}) {
-  // qitem: { question, options:[], correctAnswer: "..." }
-  // only consider "answered" when a non-null choice was stored.
-  // this lets chosen === null represent a "skipped" state that can be reattempted.
-  const isAnswered = Boolean(answered && answered.chosen != null);
+import { ANSWER_STATUS } from "../utils";
+import { BookmarkIcon } from "./Icons";
+
+export default function QuestionCard({ qitem, onAnswer, answered, disabled = false, isBookmarked = false, onToggleBookmark }) {
+  const isAnswered = Boolean(answered);
+  const hasSelection = answered?.chosen != null;
+
   return (
-    <div className="card" aria-live="polite">
+    <section className="card question-card" aria-live="polite">
       <div className="q-top">
-        <div className="q-count">Question</div>
+        <div className="q-count">{qitem.topic || "Question"}</div>
+        <button
+          className={`bookmark-btn icon-btn ${isBookmarked ? "active" : ""}`}
+          type="button"
+          onClick={onToggleBookmark}
+          aria-label={isBookmarked ? "Remove bookmark" : "Bookmark question"}
+          title={isBookmarked ? "Remove bookmark" : "Bookmark question"}
+        >
+          <BookmarkIcon filled={isBookmarked} />
+        </button>
       </div>
 
-      <div className="question" dangerouslySetInnerHTML={{ __html: qitem.question }} />
+      <h2 className="question">{qitem.question}</h2>
 
-      <div className="options">
+      <div className="options" role="group" aria-label="Answer options">
         {qitem.options.map((opt, i) => {
-          const isChosen = answered && answered.chosen === opt;
+          const isChosen = answered?.chosen === opt;
           const isCorrect = qitem.correctAnswer === opt;
+          const showFeedback = hasSelection;
+          const statusLabel = showFeedback && isCorrect ? "Correct answer" : isChosen ? "Your answer" : "";
           let cls = "option";
-          if (reveal) {
+
+          if (showFeedback) {
             if (isCorrect) cls += " correct";
-            else if (isChosen && !isCorrect) cls += " wrong";
+            else if (isChosen) cls += " wrong";
             else cls += " disabled";
           } else if (isAnswered) {
-            // when revisiting an answered question, highlight chosen and make others non-interactive
-            if (isChosen) cls += " chosen";
-            else cls += " disabled";
+            cls += " disabled";
           }
 
           return (
-            <div
-              key={i}
+            <button
+              key={opt}
               className={cls}
-              role="button"
-              tabIndex={0}
-              onClick={() => {
-                // only accept answers when not revealed and not already answered
-                if (!reveal && !isAnswered) onAnswer(opt);
-              }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  if (!reveal && !isAnswered) onAnswer(opt);
-                }
-              }}
-              aria-pressed={isChosen ? "true" : "false"}
-              aria-disabled={isAnswered || reveal ? "true" : "false"}
+              type="button"
+              onClick={() => onAnswer(opt)}
+              disabled={disabled || isAnswered}
+              aria-pressed={isChosen}
             >
-              <div className="dot">{String.fromCharCode(65 + i)}</div>
-              <div className="text" dangerouslySetInnerHTML={{ __html: opt }} />
-            </div>
+              <span className="dot" aria-hidden="true">
+                {String.fromCharCode(65 + i)}
+              </span>
+              <span className="text">{opt}</span>
+              {statusLabel ? <span className="option-status">{statusLabel}</span> : null}
+            </button>
           );
         })}
       </div>
-    </div>
+
+      {answered?.status === ANSWER_STATUS.SKIPPED ? (
+        <div className="feedback skipped">Skipped. Review this question before finishing.</div>
+      ) : null}
+
+      {isAnswered && qitem.explanation ? (
+        <div className="explanation">
+          <div className="explanation-label">Explanation</div>
+          <p>{qitem.explanation}</p>
+        </div>
+      ) : null}
+    </section>
   );
 }

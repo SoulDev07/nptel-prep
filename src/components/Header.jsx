@@ -1,7 +1,9 @@
-import React from "react";
+import { ListIcon, MoonIcon, RotateIcon, SunIcon } from "./Icons";
 import Progress from "./Progress";
 
-export default function Header({ total, correctCount, doneCount, index, answers, order, onRestart }) {
+export default function Header({ total, stats, answers, theme, onToggleTheme, onRestart, onReview }) {
+  const isDark = theme === "dark";
+
   return (
     <header className="header">
       <div className="header-content">
@@ -19,14 +21,30 @@ export default function Header({ total, correctCount, doneCount, index, answers,
             <div className="score-block">
               <div className="small-muted">Score</div>
               <div className="big">
-                {correctCount} / {total}
+                {stats.correct} / {total}
               </div>
             </div>
-            <Progress total={total} answers={answers} order={order} index={index} />
+            <Progress total={total} answers={answers} />
           </div>
-          <button className="btn restart-btn" onClick={onRestart}>
-            Restart
-          </button>
+          <div className="header-actions">
+            <button
+              className="btn icon-btn"
+              type="button"
+              onClick={onToggleTheme}
+              aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+              title={isDark ? "Switch to light theme" : "Switch to dark theme"}
+            >
+              {isDark ? <SunIcon /> : <MoonIcon />}
+            </button>
+            <button className="btn" type="button" onClick={onReview}>
+              <ListIcon />
+              Review
+            </button>
+            <button className="btn restart-btn" type="button" onClick={onRestart}>
+              <RotateIcon />
+              Restart
+            </button>
+          </div>
         </div>
       </div>
     </header>

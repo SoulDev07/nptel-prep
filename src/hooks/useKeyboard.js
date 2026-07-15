@@ -1,33 +1,26 @@
 import { useEffect } from "react";
 
 /**
- * useKeyboard({ onPrev, onNext, onAnswerByIndex, onFocusMove, onSelectFocused, onRestart })
+ * useKeyboard({ onPrev, onNext, onAnswerByIndex, onFocusMove, onRestart, onHelp })
  * - onPrev(): previous question
  * - onNext(): next question
  * - onAnswerByIndex(idx): choose option by zero-based index (0..4)
  * - onFocusMove(direction): -1 up, +1 down
- * - onSelectFocused(): select currently focused option (Enter/Space)
  * - onRestart(): restart session (triggered by 'R' or 'r')
+ * - onHelp(): open keyboard help (triggered by '?' or 'H')
  */
 export default function useKeyboard({
   onPrev = () => {},
   onNext = () => {},
   onAnswerByIndex = () => {},
   onFocusMove = () => {},
-  onSelectFocused = () => {},
   onRestart = () => {},
+  onHelp = () => {},
 }) {
   useEffect(() => {
     function onKey(e) {
       const tag = e.target?.tagName;
       if (tag === "INPUT" || tag === "TEXTAREA" || e.target?.isContentEditable) return;
-
-      // Select focused option
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        onSelectFocused();
-        return;
-      }
 
       // Move focus between options
       if (e.key === "w" || e.key === "W") {
@@ -67,9 +60,14 @@ export default function useKeyboard({
         onRestart();
         return;
       }
+
+      if (e.key === "?" || e.key === "h" || e.key === "H") {
+        e.preventDefault();
+        onHelp();
+      }
     }
 
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [onPrev, onNext, onAnswerByIndex, onFocusMove, onSelectFocused, onRestart]);
+  }, [onPrev, onNext, onAnswerByIndex, onFocusMove, onRestart, onHelp]);
 }
