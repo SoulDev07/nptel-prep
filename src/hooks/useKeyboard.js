@@ -1,14 +1,5 @@
 import { useEffect } from "react";
 
-/**
- * useKeyboard({ onPrev, onNext, onAnswerByIndex, onFocusMove, onRestart, onHelp })
- * - onPrev(): previous question
- * - onNext(): next question
- * - onAnswerByIndex(idx): choose option by zero-based index (0..4)
- * - onFocusMove(direction): -1 up, +1 down
- * - onRestart(): restart session (triggered by 'R' or 'r')
- * - onHelp(): open keyboard help (triggered by '?' or 'H')
- */
 export default function useKeyboard({
   onPrev = () => {},
   onNext = () => {},
@@ -22,7 +13,15 @@ export default function useKeyboard({
       const tag = e.target?.tagName;
       if (tag === "INPUT" || tag === "TEXTAREA" || e.target?.isContentEditable) return;
 
-      // Move focus between options
+      if (
+        document.querySelector('[role="dialog"][data-state="open"]') ||
+        document.querySelector('[role="alertdialog"][data-state="open"]') ||
+        e.target?.closest?.('[role="dialog"]') ||
+        e.target?.closest?.('[role="alertdialog"]')
+      ) {
+        return;
+      }
+
       if (e.key === "w" || e.key === "W") {
         e.preventDefault();
         onFocusMove(-1);
@@ -34,19 +33,17 @@ export default function useKeyboard({
         return;
       }
 
-      // navigation
-      if (e.key === "ArrowLeft" || e.key === "Left" || e.key === "A" || e.key === "a") {
+      if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") {
         e.preventDefault();
         onPrev();
         return;
       }
-      if (e.key === "ArrowRight" || e.key === "Right" || e.key === "D" || e.key === "d") {
+      if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") {
         e.preventDefault();
         onNext();
         return;
       }
 
-      // numeric answers 1..5
       if (["1", "2", "3", "4", "5"].includes(e.key)) {
         const idx = parseInt(e.key, 10) - 1;
         e.preventDefault();
@@ -54,7 +51,6 @@ export default function useKeyboard({
         return;
       }
 
-      // Restart
       if (e.key === "r" || e.key === "R") {
         e.preventDefault();
         onRestart();

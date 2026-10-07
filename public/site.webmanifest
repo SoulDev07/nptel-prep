@@ -1,0 +1,17 @@
+{
+  "name": "NPTEL Prep",
+  "short_name": "NPTEL Prep",
+  "description": "Practice NPTEL assignment MCQs with instant feedback and keyboard controls.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0cb79f",
+  "theme_color": "#0cb79f",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

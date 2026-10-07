@@ -1,292 +1,234 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import data from "./assets/data.json";
+import { Fragment, StrictMode, useCallback, useState } from "react";
+import { createRoot } from "react-dom/client";
+import { AlertTriangle, RotateCcw } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import defaultData from "./assets/data.json";
+import DatasetDialog from "./components/DatasetDialog";
 import Header from "./components/Header";
 import InvalidData from "./components/InvalidData";
 import QuestionCard from "./components/QuestionCard";
+import QuizControls from "./components/QuizControls";
 import ReviewPanel from "./components/ReviewPanel";
+import ShortcutsDialog from "./components/ShortcutsDialog";
 import StatsCard from "./components/StatsCard";
 import useKeyboard from "./hooks/useKeyboard";
-import {
-  ANSWER_STATUS,
-  buildAnswer,
-  calculateStats,
-  createDataSignature,
-  createInitialSession,
-  loadSession,
-  saveSession,
-  validateQuestions,
-} from "./utils";
-
-function makeSession(total, dataSignature) {
-  return loadSession(total, dataSignature) || createInitialSession(total);
-}
-
-function getInitialTheme() {
-  const saved = globalThis.localStorage?.getItem("nptel_prep_theme");
-  if (saved === "light" || saved === "dark") return saved;
-  return globalThis.matchMedia?.("(prefers-color-scheme: dark)")?.matches ? "dark" : "light";
-}
+import { useQuiz } from "./hooks/useQuiz";
+import { useTheme } from "./hooks/useTheme";
+import "./index.css";
 
 export default function App() {
-  const { questions, errors } = useMemo(() => {
-    const result = validateData(data);
-    return result;
-  }, []);
-  const total = questions.length;
-  const dataSignature = useMemo(() => createDataSignature(questions), [questions]);
-  const [session, setSession] = useState(() => makeSession(total, dataSignature));
+  const { theme, toggleTheme } = useTheme();
   const [view, setView] = useState("quiz");
   const [reviewFilter, setReviewFilter] = useState("all");
-  const [showHelp, setShowHelp] = useState(false);
-  const [theme, setTheme] = useState(getInitialTheme);
+  const [showDatasets, setShowDatasets] = useState(false);
+  const [showShortcuts, setShowShortcuts] = useState(false);
+  const [showRestartConfirm, setShowRestartConfirm] = useState(false);
+  const quiz = useQuiz(defaultData, () => setView("stats"));
 
-  useEffect(() => {
-    if (errors.length === 0) saveSession(session, dataSignature);
-  }, [dataSignature, errors.length, session]);
+  const announcement = (() => {
+    if (view === "stats") {
+      return `Session complete! Score: ${quiz.stats.correct} out of ${quiz.stats.total} correct. Accuracy: ${quiz.stats.accuracyPct} percent.`;
+    }
+    if (view === "review") {
+      return "Reviewing questions session.";
+    }
+    if (view === "quiz" && quiz.currentQuestion) {
+      if (quiz.currentAnswer) {
+        if (quiz.currentAnswer.status === "correct") {
+          return "Correct!";
+        }
+        if (quiz.currentAnswer.status === "incorrect") {
+          return `Incorrect. Correct answer is: ${quiz.currentQuestion.correctAnswer}.`;
+        }
+        if (quiz.currentAnswer.status === "skipped") {
+          return "Question skipped.";
+        }
+      }
+      return `Question ${quiz.currentIndex + 1} of ${quiz.total}: ${quiz.currentQuestion.question}`;
+    }
+    return "";
+  })();
 
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    globalThis.localStorage?.setItem("nptel_prep_theme", theme);
-  }, [theme]);
-
-  const stats = useMemo(() => calculateStats(total, session.answers), [session.answers, total]);
-  const qIndex = session.order[session.index];
-  const current = questions[qIndex];
-  const answered = session.answers[qIndex];
-
-  const updateSession = useCallback((updater) => {
-    setSession((prev) => ({ ...prev, ...updater(prev) }));
-  }, []);
-
-  const goToQuestionIndex = useCallback(
-    (questionIndex) => {
-      setSession((prev) => {
-        const existingIndex = prev.order.indexOf(questionIndex);
-        const nextOrder = existingIndex === -1 ? [questionIndex, ...prev.order] : prev.order;
-        const nextIndex = existingIndex === -1 ? 0 : existingIndex;
-        return { ...prev, order: nextOrder, index: nextIndex };
-      });
+  const handleRestart = useCallback(() => {
+    if (quiz.stats.attempted === 0) {
+      quiz.restart();
       setView("quiz");
-    },
-    [setView],
-  );
+    } else {
+      setShowRestartConfirm(true);
+    }
+  }, [quiz]);
 
-  const toggleBookmark = useCallback((questionIndex) => {
-    updateSession((prev) => {
-      const bookmarks = { ...prev.bookmarks };
-      if (bookmarks[questionIndex]) delete bookmarks[questionIndex];
-      else bookmarks[questionIndex] = true;
-      return { bookmarks };
-    });
-  }, [updateSession]);
-
-  const handleAnswer = useCallback(
-    (chosen) => {
-      if (!current || answered) return;
-      updateSession((prev) => ({
-        answers: {
-          ...prev.answers,
-          [qIndex]: buildAnswer(current, chosen),
-        },
-      }));
-    },
-    [answered, current, qIndex, updateSession],
-  );
-
-  const skipCurrent = useCallback(() => {
-    if (!current || answered) return;
-    updateSession((prev) => ({
-      answers: {
-        ...prev.answers,
-        [qIndex]: buildAnswer(current, null),
-      },
-    }));
-  }, [answered, current, qIndex, updateSession]);
-
-  const finishSession = useCallback(() => {
-    setSession((prev) => ({
-      ...prev,
-      history: [
-        ...prev.history.slice(-9),
-        {
-          completedAt: new Date().toISOString(),
-          stats: calculateStats(total, prev.answers),
-        },
-      ],
-    }));
-    setView("stats");
-  }, [total]);
-
-  const next = useCallback(() => {
-    setSession((prev) => {
-      if (prev.index < prev.order.length - 1) return { ...prev, index: prev.index + 1 };
-      return prev;
-    });
-    if (session.index >= session.order.length - 1) finishSession();
-  }, [finishSession, session.index, session.order.length]);
-
-  const prev = useCallback(() => {
-    setSession((currentSession) => ({
-      ...currentSession,
-      index: Math.max(currentSession.index - 1, 0),
-    }));
+  const confirmRestart = useCallback(() => {
+    quiz.restart();
     setView("quiz");
-  }, []);
+    setShowRestartConfirm(false);
+  }, [quiz]);
 
-  const skipAndNext = useCallback(() => {
-    skipCurrent();
-    next();
-  }, [next, skipCurrent]);
-
-  const restart = useCallback(() => {
-    const shouldRestart = stats.attempted === 0 || window.confirm("Restart this session and clear current progress?");
-    if (!shouldRestart) return;
-    setSession({ ...createInitialSession(total), dataSignature });
+  const handleRetryMissed = useCallback(() => {
+    quiz.retryMissed();
     setView("quiz");
-    setReviewFilter("all");
-  }, [dataSignature, stats.attempted, total]);
+  }, [quiz]);
 
-  const retryMissed = useCallback(() => {
-    const missed = questions
-      .map((_, index) => index)
-      .filter((index) => {
-        const status = session.answers[index]?.status;
-        return status === ANSWER_STATUS.INCORRECT || status === ANSWER_STATUS.SKIPPED;
-      });
-
-    if (missed.length === 0) return;
-
-    setSession((prev) => {
-      const answers = { ...prev.answers };
-      missed.forEach((index) => {
-        delete answers[index];
-      });
-      return { ...prev, order: missed, index: 0, answers };
-    });
+  const handleJumpToQuestion = useCallback((index) => {
+    quiz.goToIndex(index);
     setView("quiz");
-  }, [questions, session.answers]);
-
-  const answerByIndex = useCallback(
-    (optIdx) => {
-      if (current?.options[optIdx] != null && !answered) handleAnswer(current.options[optIdx]);
-    },
-    [answered, current, handleAnswer],
-  );
-
-  const focusOption = useCallback((direction) => {
-    const opts = Array.from(document.querySelectorAll(".option"));
-    if (!opts.length) return;
-    const active = document.activeElement;
-    let index = opts.indexOf(active);
-    if (index === -1) index = direction > 0 ? -1 : opts.length;
-    opts[Math.min(Math.max(index + direction, 0), opts.length - 1)]?.focus();
-  }, []);
+  }, [quiz]);
 
   useKeyboard({
-    onPrev: prev,
-    onNext: answered ? next : skipAndNext,
-    onAnswerByIndex: answerByIndex,
-    onFocusMove: focusOption,
-    onRestart: restart,
-    onHelp: () => setShowHelp(true),
+    onPrev: quiz.prev,
+    onNext: quiz.currentAnswer ? quiz.next : quiz.skipAndNext,
+    onAnswerByIndex: quiz.answerByIndex,
+    onRestart: handleRestart,
+    onHelp: () => setShowShortcuts(true),
   });
 
-  if (errors.length > 0) return <InvalidData errors={errors} />;
+  if (quiz.errors.length > 0) {
+    return <InvalidData errors={quiz.errors} />;
+  }
 
   return (
-    <div className="app">
+    <div className="w-full max-w-4xl mx-auto my-0 sm:my-5 p-3.5 sm:p-5 flex flex-col gap-4 border-0 sm:border border-border rounded-none sm:rounded-2xl bg-card shadow-none sm:shadow-lg min-h-dvh sm:min-h-0">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg focus:shadow-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 font-medium text-sm"
+      >
+        Skip to main content
+      </a>
+
+      <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+        {announcement}
+      </div>
+
       <Header
-        total={total}
-        stats={stats}
-        answers={session.answers}
+        total={quiz.total}
+        stats={quiz.stats}
+        answers={quiz.session.answers}
         theme={theme}
-        onToggleTheme={() => setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"))}
-        onRestart={restart}
+        activeDatasetName={quiz.activeDataset.name}
+        onToggleTheme={toggleTheme}
+        onOpenDatasets={() => setShowDatasets(true)}
+        onRestart={handleRestart}
         onReview={() => setView("review")}
+        onOpenHelp={() => setShowShortcuts(true)}
       />
 
-      {view === "stats" ? (
-        <StatsCard stats={stats} onRestart={restart} onReview={() => setView("review")} onRetryMissed={retryMissed} />
-      ) : view === "review" ? (
-        <ReviewPanel
-          questions={questions}
-          answers={session.answers}
-          bookmarks={session.bookmarks}
-          filter={reviewFilter}
-          onFilterChange={setReviewFilter}
-          onBack={() => setView("quiz")}
-          onJumpToQuestion={goToQuestionIndex}
-          onToggleBookmark={toggleBookmark}
-        />
-      ) : current ? (
-        <>
-          <QuestionCard
-            qitem={current}
-            onAnswer={handleAnswer}
-            answered={answered}
-            isBookmarked={Boolean(session.bookmarks[qIndex])}
-            onToggleBookmark={() => toggleBookmark(qIndex)}
+      <main id="main-content" tabIndex={-1} className="flex flex-col gap-4 outline-none">
+        {view === "stats" && (
+          <StatsCard
+            stats={quiz.stats}
+            onRestart={handleRestart}
+            onReview={() => setView("review")}
+            onRetryMissed={handleRetryMissed}
           />
+        )}
 
-          <div className="actions">
-            <button className="btn small" type="button" onClick={prev} disabled={session.index === 0}>
-              Prev
-            </button>
-            <div className="action-group">
-              <button className="btn small" type="button" onClick={skipAndNext} disabled={Boolean(answered)}>
-                Skip
-              </button>
-              <button className="btn primary" type="button" onClick={next}>
-                {session.index === session.order.length - 1 ? "Finish" : "Next"}
-              </button>
-            </div>
-          </div>
+        {view === "review" && (
+          <ReviewPanel
+            questions={quiz.questions}
+            answers={quiz.session.answers}
+            bookmarks={quiz.session.bookmarks}
+            filter={reviewFilter}
+            onFilterChange={setReviewFilter}
+            onBack={() => setView("quiz")}
+            onJumpToQuestion={handleJumpToQuestion}
+            onToggleBookmark={quiz.toggleBookmark}
+          />
+        )}
 
-          <div className="summary">
-            <div>
-              Attempted: {stats.attempted} · Correct: {stats.correct} · Skipped: {stats.skipped}
-            </div>
-            <div>
-              Q {session.index + 1} / {session.order.length}
-            </div>
-          </div>
-        </>
-      ) : (
-        <div className="card empty-state">No questions found.</div>
-      )}
+        {view === "quiz" && (
+          <>
+            <QuestionCard
+              question={quiz.currentQuestion}
+              answered={quiz.currentAnswer}
+              isBookmarked={quiz.isBookmarked}
+              onAnswer={quiz.answer}
+              onToggleBookmark={() => quiz.toggleBookmark()}
+            />
+            <QuizControls
+              currentIndex={quiz.currentIndex}
+              total={quiz.session.order.length}
+              answered={quiz.currentAnswer}
+              stats={quiz.stats}
+              onPrev={quiz.prev}
+              onSkipAndNext={quiz.skipAndNext}
+              onNext={quiz.next}
+            />
+          </>
+        )}
+      </main>
 
-      {showHelp ? (
-        <div className="modal-backdrop" role="presentation" onClick={() => setShowHelp(false)}>
-          <section className="help-dialog" role="dialog" aria-modal="true" aria-labelledby="help-title" onClick={(event) => event.stopPropagation()}>
-            <h2 id="help-title">Keyboard shortcuts</h2>
-            <dl>
-              <div>
-                <dt>1-5</dt>
-                <dd>Choose an answer</dd>
+      <DatasetDialog
+        open={showDatasets}
+        onOpenChange={setShowDatasets}
+        datasets={quiz.datasets}
+        activeDatasetId={quiz.activeDatasetId}
+        onSelectDataset={quiz.selectDataset}
+        onUploadDataset={quiz.uploadDataset}
+        onDeleteDataset={quiz.deleteDataset}
+      />
+
+      <ShortcutsDialog open={showShortcuts} onOpenChange={setShowShortcuts} />
+
+      <Dialog open={showRestartConfirm} onOpenChange={setShowRestartConfirm}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader className="gap-3 sm:gap-3.5">
+            <div className="flex items-start gap-3 sm:gap-3.5">
+              <div className="size-10 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 border border-amber-500/20 mt-0.5" aria-hidden="true">
+                <AlertTriangle className="size-5" />
               </div>
-              <div>
-                <dt>W / S</dt>
-                <dd>Move option focus</dd>
+              <div className="space-y-1 text-left min-w-0">
+                <DialogTitle className="text-base font-semibold text-foreground tracking-tight">
+                  Restart this session?
+                </DialogTitle>
+                <DialogDescription className="text-xs sm:text-sm text-muted-foreground leading-relaxed text-pretty">
+                  Your current progress ({quiz.stats.attempted} attempted) will be cleared, and questions will be reshuffled. This action cannot be undone.
+                </DialogDescription>
               </div>
-              <div>
-                <dt>A / D</dt>
-                <dd>Previous or next</dd>
-              </div>
-              <div>
-                <dt>R</dt>
-                <dd>Restart with confirmation</dd>
-              </div>
-            </dl>
-            <button className="btn primary" type="button" onClick={() => setShowHelp(false)}>
-              Close
-            </button>
-          </section>
-        </div>
-      ) : null}
+            </div>
+          </DialogHeader>
+          <DialogFooter className="gap-2 sm:gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowRestartConfirm(false)}
+              className="w-full sm:w-auto"
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="default"
+              size="sm"
+              className="w-full sm:w-auto bg-amber-600 hover:bg-amber-700 text-white dark:bg-amber-600 dark:hover:bg-amber-700 font-semibold gap-1.5 shadow-xs"
+              onClick={confirmRestart}
+            >
+              <RotateCcw className="size-3.5" aria-hidden="true" />
+              Restart now
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
 
-function validateData(rawData) {
-  return validateQuestions(rawData);
+const rootElement = document.getElementById("root");
+if (rootElement) {
+  const Wrapper = import.meta.env.DEV ? StrictMode : Fragment;
+  const root = rootElement._reactRoot ?? (rootElement._reactRoot = createRoot(rootElement));
+  root.render(
+    <Wrapper>
+      <TooltipProvider delayDuration={250}>
+        <App />
+      </TooltipProvider>
+    </Wrapper>,
+  );
 }

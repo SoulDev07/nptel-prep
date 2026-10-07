@@ -104,7 +104,7 @@ export function normalizeSavedSession(saved, total, dataSignature) {
 
 export function loadSession(total, dataSignature, storage = globalThis.localStorage) {
   try {
-    const raw = storage?.getItem(STORAGE_KEY);
+    const raw = storage?.getItem(`${STORAGE_KEY}_${dataSignature}`);
     if (!raw) return null;
     return normalizeSavedSession(JSON.parse(raw), total, dataSignature);
   } catch {
@@ -114,7 +114,7 @@ export function loadSession(total, dataSignature, storage = globalThis.localStor
 
 export function saveSession(session, dataSignature, storage = globalThis.localStorage) {
   try {
-    storage?.setItem(STORAGE_KEY, JSON.stringify({ ...session, version: STORAGE_VERSION, dataSignature }));
+    storage?.setItem(`${STORAGE_KEY}_${dataSignature}`, JSON.stringify({ ...session, version: STORAGE_VERSION, dataSignature }));
   } catch (error) {
     console.warn("Unable to save quiz session", error);
   }
@@ -130,16 +130,15 @@ export function buildAnswer(question, chosen) {
   return {
     chosen,
     status,
-    correct: status === ANSWER_STATUS.CORRECT,
     answeredAt: new Date().toISOString(),
   };
 }
 
 export function calculateStats(total, answers = {}) {
   const values = Object.values(answers);
-  const correct = values.filter((answer) => answer.status === ANSWER_STATUS.CORRECT || answer.correct === true).length;
+  const correct = values.filter((answer) => answer.status === ANSWER_STATUS.CORRECT).length;
   const incorrect = values.filter((answer) => answer.status === ANSWER_STATUS.INCORRECT).length;
-  const skipped = values.filter((answer) => answer.status === ANSWER_STATUS.SKIPPED || (!answer.status && answer.chosen == null)).length;
+  const skipped = values.filter((answer) => answer.status === ANSWER_STATUS.SKIPPED).length;
   const attempted = values.length;
   const unanswered = Math.max(total - attempted, 0);
 
@@ -162,9 +161,9 @@ export function filterQuestionIndices({ filter, questions, answers, bookmarks })
       const answer = answers[index];
       const isBookmarked = Boolean(bookmarks[index]);
 
-      if (filter === "correct") return answer?.status === ANSWER_STATUS.CORRECT || answer?.correct === true;
+      if (filter === "correct") return answer?.status === ANSWER_STATUS.CORRECT;
       if (filter === "incorrect") return answer?.status === ANSWER_STATUS.INCORRECT;
-      if (filter === "skipped") return answer?.status === ANSWER_STATUS.SKIPPED || (answer && !answer.status && answer.chosen == null);
+      if (filter === "skipped") return answer?.status === ANSWER_STATUS.SKIPPED;
       if (filter === "unanswered") return !answer;
       if (filter === "bookmarked") return isBookmarked;
       return true;

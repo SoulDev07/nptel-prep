@@ -3,58 +3,70 @@
 
 <head>
   <meta charset="UTF-8" />
-  <!-- favicon -->
-  <link rel="icon" href="/logo.svg" type="image/svg+xml" />
-  <!-- preconnect for Google Fonts to improve LCP -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- SEO: description, keywords, robots -->
-  <title>NPTEL Prep</title>
-  <meta name="description" content="NPTEL Prep - Practice multiple-choice questions. One question at a time, instant feedback, progress tracking and keyboard controls. Mobile friendly." />
-  <meta name="keywords" content="NPTEL, practice, MCQ, quiz, progress tracker" />
-  <meta name="robots" content="index,follow" />
 
-  <!-- Open Graph: use the generated OG SVGs -->
-  <meta property="og:title" content="NPTEL Prep" />
-  <meta property="og:description" content="Practice NPTEL-style MCQs with instant feedback, progress tracking and keyboard shortcuts." />
+  <!-- Meta Tags -->
+  <title>NPTEL Prep</title>
+  <meta name="title" content="NPTEL Prep" />
+  <meta name="description" content="Practice NPTEL assignment MCQs with instant feedback, keyboard controls, and progress tracking." />
+  <meta name="keywords" content="NPTEL, MCQ, practice, quiz, assignments" />
+  <meta name="robots" content="index, follow" />
+
+  <link rel="canonical" href="https://nptel-prep.vercel.app/" />
+
+  <!-- Favicon & Web App Manifest -->
+  <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/logo.svg" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="/og-card.svg" />
-  <meta property="og:image:alt" content="NPTEL Prep - Practice MCQs, instant feedback and progress tracking" />
+  <meta property="og:url" content="https://nptel-prep.vercel.app/" />
+  <meta property="og:site_name" content="NPTEL Prep" />
+  <meta property="og:title" content="NPTEL Prep" />
+  <meta property="og:description" content="Practice NPTEL assignment MCQs with instant feedback, keyboard controls, and progress tracking." />
+  <meta property="og:image" content="/home.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:site_name" content="NPTEL Prep" />
+  <meta property="og:locale" content="en_US" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://nptel-prep.vercel.app/" />
   <meta name="twitter:title" content="NPTEL Prep" />
-  <meta name="twitter:description" content="Practice NPTEL-style MCQs with instant feedback, progress tracking and keyboard shortcuts." />
-  <meta name="twitter:image" content="/og-card.svg" />
-  <meta name="twitter:image:alt" content="NPTEL Prep - Practice MCQs" />
+  <meta name="twitter:description" content="Practice NPTEL assignment MCQs with instant feedback, keyboard controls, and progress tracking." />
+  <meta name="twitter:image" content="/home.png" />
 
-  <!-- Provide a dark-image hint (some platforms will use it if supported) -->
-  <meta name="theme-color" content="#ffffff" />
-  <meta name="msapplication-TileImage" content="/og-card.svg" />
+  <!-- Theme Colors -->
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f1f7f6" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a1513" />
 
-  <!-- Structured data (WebSite) -->
+  <!-- Structured Data -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
+      "@type": "WebApplication",
       "name": "NPTEL Prep",
-      "url": "/",
-      "description": "Practice NPTEL multiple-choice questions with instant feedback and progress tracking."
+      "url": "https://nptel-prep.vercel.app/",
+      "description": "Practice NPTEL assignment MCQs with instant feedback, keyboard controls, and progress tracking.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "All"
     }
   </script>
-
-  <!-- keep font import -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
+
+  <noscript>
+    <main style="padding: 2rem; max-width: 600px; margin: 0 auto; font-family: system-ui, sans-serif;">
+      <h1>NPTEL Prep</h1>
+      <p>Practice NPTEL assignment multiple-choice questions with instant feedback and keyboard shortcuts.</p>
+      <p>Please enable JavaScript to run the application.</p>
+    </main>
+  </noscript>
+
+  <script type="module" src="/src/App.jsx"></script>
 </body>
 
 </html>
